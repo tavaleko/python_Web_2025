@@ -151,6 +151,80 @@ for i in range(100,1):
 
 for i in reversed(range(100,1)):
     print(i)  # выводит все числа от 100 до 2
-"""
+
 for i in reversed(range(5,96,5)):
-    print(i)  # выводит все числа от 100 до 2
+    print(i)  # выводит все числа от 95 до 5 c шагом 5
+for i in range(5,96,5):
+    print(i)  # выводит все числа от 5 до 95 с шагом 5
+
+# min, max, average, summ,production
+N = 5
+total = 0
+min_val = float ('inf') # + бесконечность
+max_val = float ('-inf') # - бесконечность
+prod = 1
+
+for _ in range(N):
+    num = int(input('Введите целое число:'))
+    total += num
+    average = total/N
+print(f'Сумма: {total}')
+print(f'Ср. арифмитическое: {total}')
+
+for _ in range(N):
+    num = int(input('Введите целое число:'))
+    if  num < min_val:
+        min_val = num
+    if num > max_val:
+        max_val = num
+    total += num
+    prod *= num
+    average = total/N
+print(f'Сумма: {total}')
+print(f'Произведение: {prod}')
+print(f'Ср. арифмитическое: {average}')
+print(f'минимум: {min_val}')
+print(f'Максимум: {max_val}')
+
+# Как вычислить факториал factorial
+N = 5
+fact = 1
+for i  in range(1,N+1):
+    fact *= i
+print(fact)
+
+prod = 1
+for i in range (1,10):
+    for j in range (1,10):
+        prod = j*i
+        print(prod)
+
+for i in range (1,10):
+    for j in range (1,10):
+        print(f'{i}*{j} ={i*j}', end = '\t')
+    print() # выведет из без этого принта, но будет одна строка с ним получается таблица
+
+# рост человека 150 < haight <180
+# нам нужно вычислить число кандидатов
+# число кто прошёл
+# среди прошедших мин и мах
+# останавливается на -1 сигнал остановки
+Haight = int(input('Ваше значение: '))
+total = 0
+total_success = 0
+min_val = float('-inf')
+max_val = float('inf')
+while (num := int(input('Ваше значение: '))) != -1:
+    if 150 <= num <= 180:
+       total_success += 1
+
+    if min_val > num :
+        min_val = num
+    if max_val < num:
+        max_val = num
+    total += 1
+print(f'Сумма: {total}')
+print(f'Сумма прошедших отбор: {total_success}')
+print(f'Минимум: {min_val}')
+print(f'Максимум: {max_val}') # где то есть ошибка в сложении
+"""
