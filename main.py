@@ -1,50 +1,29 @@
+# Создаем алфавит
+alphabet = 'абвгдеёжзийклмнопрстуфхцчшщьыъэюя'# alphabet +=alphabet.upper() если нужно отдельно зашифровать большие и
+# маленькие буквы, но тогда  метод lower не надо
+ #  Получаем входные данные
+massage = input('Введите строку: ').strip().lower()
+key = int(input('Ввведите ключ:'))
+# Иницианализируем пустую строку для результата
+encrypted = ''
+# Перебераем каждый символ в сообщении
+for letter in massage:
+     # Проверяем, является ли символ буквой из алфавита
+     if letter in alphabet:
+         # находим позицию
+         t = alphabet.index(letter)
+         # Вычисляем новую позицию с учетом сдвига
+         new_key = (t+ key )%len(alphabet) # % используем для того чтобы не выскачить за приделы строки
+         # Добовляем зашифровонный символ
+         encrypted += alphabet[new_key]
 
-print('mause house "ville"')
-# python enhanced proposal 8
-name = 'Сергей' # string
-surname = 'Петров'
-age = 27
-print('Привет,', name, surname, 'тебе', age, 'лет')
-temperatura = 27
-print('На улице температура,', temperatura, 'градусов.')
-name = input('как тебя зовут: ') # str
-print('Привет,', name)
-print('Приятно познакомиться')
-print()
-
-donut = int(input('стоимость пончика: '))
-cofee = int(input('Стоимость кофе: '))
-#  total = coffee + donut
-# int, float, str
-print('С вас', cofee + donut, 'руб.')
-donut = input('стоимость пончика: ')
-cofee = input('Стоимость кофе: ')
-#  total = coffee + donut
-# int, float, str
-print('С вас', int(cofee) + int(donut), 'руб.')
-donut = float(input('стоимость пончика: '))
-cofee = float(input('Стоимость кофе: '))
-#  total = coffee + donut
-# int, float, str
-print('С вас', cofee + donut, 'руб.')
-a = 35.999
-print(int(a))
-temp = round(a)
-temp = round(a,2)
-temp = round(a,0)
-print(temp)
-screen = 1280 //6
-print(screen)
-number = int(input('Введите число: '))
-print('Число', number, 'заканчивается на', number % 10)
-print('Число'+ str(number) + 'заканчивается на', number % 10)
-""" 
-у лукоморья дуб зеленый
-"""
-temp = """ 
-у лукоморья дуб зеленый
-"""
-number = int(input('Введите число: '))
-print( 'число',number, 'в степени 3 будет', number**3 )
-print( 'квадратный корень от', number, 'будет', number **(1/2))
-print(4/2)# всегда будет float
+     else:
+         # Если символ не буква, оставим его без изменений
+         encrypted += letter
+         # Для расшифровки достаточно  изменить формулу вычисления позиции:
+         # new_key = (t - key) % len (alphabet)
+print('Зашивровоное сообщение: ', encrypted)
+# % 2 всегда будет 0 и 1
+# % 3 всегда будет 0 и 1 и 2
+# % 4 всегда будет 0 и 1 и 2 и 3
+# % 5 всегда будет 0 и 1 и 2 и 3 и 4
