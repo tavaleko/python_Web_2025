@@ -1,50 +1,40 @@
+number_to_str = {
+    0:'ноль',
+    1:'один',
+    2:'два',
+    3:'три',
+    4:'четыре',
+    5:'пять',
+    6:'шесть',
+    7:'семь',
+    8:'восемь',
+    9:'девять',
+    10:'десять',
+    11:'одинадцать',
+    12:'двенадцать',
+    13:'тринадцать',
+    14:'четырнадцать',
+    15:'пятнадцать',
+    16:'шеснадцать',
+    17:'семнадцать',
+    18:'восемнадцать',
+    19:'девятнадцать',
+    20:'двадцать',
+    30:'тридцать',
+    40:'сорок',
+    50:'тридцать',
+    60:'шестьдесят',
+    70:'семьдесят',
+    80:'восемьдесят',
+    90:'девяносто',
+}
+#функция с анотацией
+def number_to_word (n):
+    if len(str(n)) > 2:
+        return 'вводите двухзначное число'
+    if len(str(n)) == 1 or n in number_to_str:
+        return number_to_str[int(n)]
+    return number_to_str[int(str(n)[0]+ '0')] + '' + number_to_str[int(str(n)[1])]
 
-print('mause house "ville"')
-# python enhanced proposal 8
-name = 'Сергей' # string
-surname = 'Петров'
-age = 27
-print('Привет,', name, surname, 'тебе', age, 'лет')
-temperatura = 27
-print('На улице температура,', temperatura, 'градусов.')
-name = input('как тебя зовут: ') # str
-print('Привет,', name)
-print('Приятно познакомиться')
-print()
 
-donut = int(input('стоимость пончика: '))
-cofee = int(input('Стоимость кофе: '))
-#  total = coffee + donut
-# int, float, str
-print('С вас', cofee + donut, 'руб.')
-donut = input('стоимость пончика: ')
-cofee = input('Стоимость кофе: ')
-#  total = coffee + donut
-# int, float, str
-print('С вас', int(cofee) + int(donut), 'руб.')
-donut = float(input('стоимость пончика: '))
-cofee = float(input('Стоимость кофе: '))
-#  total = coffee + donut
-# int, float, str
-print('С вас', cofee + donut, 'руб.')
-a = 35.999
-print(int(a))
-temp = round(a)
-temp = round(a,2)
-temp = round(a,0)
-print(temp)
-screen = 1280 //6
-print(screen)
-number = int(input('Введите число: '))
-print('Число', number, 'заканчивается на', number % 10)
-print('Число'+ str(number) + 'заканчивается на', number % 10)
-""" 
-у лукоморья дуб зеленый
-"""
-temp = """ 
-у лукоморья дуб зеленый
-"""
-number = int(input('Введите число: '))
-print( 'число',number, 'в степени 3 будет', number**3 )
-print( 'квадратный корень от', number, 'будет', number **(1/2))
-print(4/2)# всегда будет float
+print(number_to_word(83))
