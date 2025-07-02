@@ -324,51 +324,85 @@
 # print(sandwich('котлета', with_onion=True))# работает столбец Булочка лук котлета булочка
 #######################################
 # *args, **kwargs # переменное количество именованых аргументов и переменное количество позиционных элементов
-def print_any(*args, **kwargs):# *args-картеж(позиционные переменные), **kwargs-словарь(именованых переменных)
-    for i in args:
-        print (i)
-    for k,v in kwargs.items():
-        print(k, '=', v)
-print_any('Дмитрий','Колесов',city='Москва', age=27)
+# *args, **kwargs # переменное количество именованых аргументов и переменное количество позиционных элементов
+# def print_any(*args, **kwargs):# *args-картеж(позиционные переменные), **kwargs-словарь(именованых переменных)
+#     for i in args:
+#         print (i)
+#     for k,v in kwargs.items():
+#         print(k, '=', v)
+# print_any('Дмитрий','Колесов',city='Москва', age=27)
+#
+#
+# def profile(name,surname,city,*children, **additional):
+#     print(f'Имя:{name}')
+#     print(f'Фамилия:{surname}')
+#     print(f'Из города:{city}')
+#     if len(children)>0:
+#         print('Дети', ','.join(children))
+#         #print('Хобби:', end=':'
+#
+#     print('Хобби:', end=':')
+#     print(additional)
+#
+# profile('Дмитрий','Колесов','Волгоград','Мария','Пётр', hobbie ='ача')#
+#
+# def profile(name,surname,city,*children, **additional):# не обязательно писать *args **kwarks
+#     print(f'Имя:{name}')
+#     print(f'Фамилия:{surname}')
+#     print(f'Из города:{city}')
+#     if len(children)>0:
+#         print('Дети', ','.join(children))
+#         #print('Хобби:', end=':'
+#     if 'hobbie' in additional:
+#         print('Хобби:', additional['hobbie'])
+#
+#
+# profile('Дмитрий','Колесов','Волгоград','Мария','Пётр', hobbie ='ача')# более красивый вывод
+#
+#
+# def profile(name, surname, city, *children, **additional):  # не обязательно писать *args **kwarks
+#     print(f'Имя:{name}')
+#     print(f'Фамилия:{surname}')
+#     print(f'Из города:{city}')
+#     if len(children) > 0:
+#         print('Дети', ','.join(children))
+#         # print('Хобби:', end=':'
+#     if 'hobbie' in additional:
+#         print('Хобби:',','.join(additional['hobbie']))# если насколько хобби
+#
+#
+# profile('Дмитрий', 'Колесов', 'Волгоград', 'Мария', 'Пётр', hobbie=['ача','шах'])  # более красивый вывод
+печатник = print
+печатник('Привет, мир')# Привет, мир выведет так что функцию можно передавать.
+####################################################
+# Функцмия как объект
+# передается в другие функции: функции высшего порядка
+# ФУНКЦИЯ КРИТЕРИЯ ОТБОРА ЭЛЕМЕНТОВ СПИСКА
+# КРИТЕРИЙ: длина слова
 
+# def is_longer_six(word):
+#     return len(word) >=6
+# words = ['В', 'этом','списке','останутся','слова','длина','которых','больше','шести']
+# result = list(filter(is_longer_six, words))
+# print(result)
+# for word in filter(is_longer_six,words):
+#     print(word)
 
-def profile(name,surname,city,*children, **additional):
-    print(f'Имя:{name}')
-    print(f'Фамилия:{surname}')
-    print(f'Из города:{city}')
-    if len(children)>0:
-        print('Дети', ','.join(children))
-        #print('Хобби:', end=':'
+# words = ['а', 'арбуз', 'начинается', 'на', 'букву', 'а', 'как', 'и', 'ананас']
+# # Критерий первая буква
+# def is_first_letter_a (word):
+#     return word[0] =='а'
+# result = list(filter(is_first_letter_a, words))
+# print(result)
+#
+# for word in filter(is_first_letter_a,words):
+#     print(word)
+#########################################
+# Фильтр filter and map
+def square(num):
+    return num **2
+nums =[1,2,3,4,5,6,7,8,9]
+squares = map(square, nums)
+print(list(squares))
 
-    print('Хобби:', end=':')
-    print(additional)
-
-profile('Дмитрий','Колесов','Волгоград','Мария','Пётр', hobbie ='ача')#
-
-def profile(name,surname,city,*children, **additional):# не обязательно писать *args **kwarks
-    print(f'Имя:{name}')
-    print(f'Фамилия:{surname}')
-    print(f'Из города:{city}')
-    if len(children)>0:
-        print('Дети', ','.join(children))
-        #print('Хобби:', end=':'
-    if 'hobbie' in additional:
-        print('Хобби:', additional['hobbie'])
-
-
-profile('Дмитрий','Колесов','Волгоград','Мария','Пётр', hobbie ='ача')# более красивый вывод
-
-
-def profile(name, surname, city, *children, **additional):  # не обязательно писать *args **kwarks
-    print(f'Имя:{name}')
-    print(f'Фамилия:{surname}')
-    print(f'Из города:{city}')
-    if len(children) > 0:
-        print('Дети', ','.join(children))
-        # print('Хобби:', end=':'
-    if 'hobbie' in additional:
-        print('Хобби:',','.join(additional['hobbie']))# если насколько хобби
-
-
-profile('Дмитрий', 'Колесов', 'Волгоград', 'Мария', 'Пётр', hobbie=['ача','шах'])  # более красивый вывод
-
+#у нас есть список 123456789 с помощью map  превратить с сторку и с помощью join соединить
