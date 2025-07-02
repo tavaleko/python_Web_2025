@@ -323,5 +323,52 @@
 #     print('Булочка')
 # print(sandwich('котлета', with_onion=True))# работает столбец Булочка лук котлета булочка
 #######################################
-# *args, **kwargs
-def print_any(*args, **kwargs):
+# *args, **kwargs # переменное количество именованых аргументов и переменное количество позиционных элементов
+def print_any(*args, **kwargs):# *args-картеж(позиционные переменные), **kwargs-словарь(именованых переменных)
+    for i in args:
+        print (i)
+    for k,v in kwargs.items():
+        print(k, '=', v)
+print_any('Дмитрий','Колесов',city='Москва', age=27)
+
+
+def profile(name,surname,city,*children, **additional):
+    print(f'Имя:{name}')
+    print(f'Фамилия:{surname}')
+    print(f'Из города:{city}')
+    if len(children)>0:
+        print('Дети', ','.join(children))
+        #print('Хобби:', end=':'
+
+    print('Хобби:', end=':')
+    print(additional)
+
+profile('Дмитрий','Колесов','Волгоград','Мария','Пётр', hobbie ='ача')#
+
+def profile(name,surname,city,*children, **additional):# не обязательно писать *args **kwarks
+    print(f'Имя:{name}')
+    print(f'Фамилия:{surname}')
+    print(f'Из города:{city}')
+    if len(children)>0:
+        print('Дети', ','.join(children))
+        #print('Хобби:', end=':'
+    if 'hobbie' in additional:
+        print('Хобби:', additional['hobbie'])
+
+
+profile('Дмитрий','Колесов','Волгоград','Мария','Пётр', hobbie ='ача')# более красивый вывод
+
+
+def profile(name, surname, city, *children, **additional):  # не обязательно писать *args **kwarks
+    print(f'Имя:{name}')
+    print(f'Фамилия:{surname}')
+    print(f'Из города:{city}')
+    if len(children) > 0:
+        print('Дети', ','.join(children))
+        # print('Хобби:', end=':'
+    if 'hobbie' in additional:
+        print('Хобби:',','.join(additional['hobbie']))# если насколько хобби
+
+
+profile('Дмитрий', 'Колесов', 'Волгоград', 'Мария', 'Пётр', hobbie=['ача','шах'])  # более красивый вывод
+
