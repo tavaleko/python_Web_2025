@@ -295,6 +295,21 @@
 #     return results
 # print(summ(5,8,9,3)) # не работает
 
+# def calc(*args: tuple, operator: str = '+') -> any: # это если строка и цифры
+#     match operator:
+#         case '+':
+#             result = 0
+#             for i in args:
+#                 result += i
+#         case '*':
+#             result = 1
+#             for i in args:
+#                 result *= i
+#         case _:  # случай по default
+#             return 'так нельзя'
+#     return result
+# print(calc(1, 2, 3, operator='*'))
+
 
 
 # программа сендвич
