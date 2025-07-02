@@ -225,4 +225,88 @@
 # print(names,surname)# ['Кирилл', 'Сулейман'] Бендорчук
 # names = 'Кирилл Сулейман Бендорчук'.split()
 # print(*names)# Кирилл Сулейман Бендорчук
+##############################################
+#Функция с переменным числом переменных
+# def multy(*args):
+#     print(len(args))# подсчет числа аргутентов
+#     print(args)# можем общащаться к каждому элементу по индексу перебором в цикле
+#
+# multy(1,2)# возвращает кортеж
+# result = 1
+#
+# def multy(*args):# * говорит что аргументов может быть как один так и много
+#     # if args is None:# не нужно
+#     if not args:
+#         return 0
+#     for arg in args:
+#         result *= arg
+#     return result
+#
+# print(multy())  # возвращает кортеж
+# result = 1
+# def multy(*args):# * говорит что аргументов может быть как один так и много
+#     if not args:
+#         return 0
+#     for arg in args:
+#         result *= arg
+#     return result
+#
+# print(multy(5.4,3.2,4,7))  # возвращает кортеж
+# #UnboundLocalError: cannot access local variable 'result' where it is not associated with a value
+# def multy(first, *args):# * говорит что аргументов может быть как один так и много
+#     if not args:
+#         return first
+#     result = first
+#     for arg in args:
+#         result *= arg
+#     return result
+#
+# print(multy(5.4,3.2,4,7))#483.84000000000003
+# print(multy(2))#2
+# def multy(*args, first):# *args переменные а First именованый
+#     if not args:
+#         return first
+#     result = first
+#     for arg in args:
+#         result *= arg
+#     return result
+#
+# # print(multy(5.4,3.2,4,7))#483.84000000000003
+# print(multy(2))#ulty() missing 1 required keyword-only argument: 'first'
+# def fio(name,surname):
+#     return f'{name} {surname}'
+#
+# print(fio(name='Ирилл', surname='Парос'))
+#
+# def multy(*args, first=0):# *args переменные а First именованый
+#     if not args:
+#         return first
+#     result = first
+#     for arg in args:
+#         result *= arg
+#     return result
+# print(multy(5.4,3.2,4,7))#0.0
 
+# def summ(*args, operator='+'):
+#     if not args:
+#         return 0
+#     for arg in args:
+#         results += arg
+#     return results
+# print(summ(5,8,9,3)) # не работает
+
+
+
+# программа сендвич
+# def sandwich(type_of_meal,with_onion=False,with_tomato=False):
+#     print('Булочка')
+#     if with_onion:
+#         print('лук')
+#     print(type_of_meal)
+#     if with_tomato:
+#         print('Томат')
+#     print('Булочка')
+# print(sandwich('котлета', with_onion=True))# работает столбец Булочка лук котлета булочка
+#######################################
+# *args, **kwargs
+def print_any(*args, **kwargs):
