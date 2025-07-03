@@ -190,4 +190,86 @@ import sys
 #
 # print(factorial_rec(0))
 # фрактал!!!!
+###################################
+# черепашья графика
+############################
+import turtle
+# turtle.forward(50)
+# turtle.right(90)
+# turtle.forward(50)
+# turtle.mainloop()
 
+# for i in range(4):
+#     turtle.forward(100)
+#     turtle.right(90)# квадрат
+# turtle.mainloop()
+#
+# for i in range(3):
+#     turtle.forward(100)
+#     turtle.right(120)# треугольник
+# turtle.mainloop()
+N =8
+# for i in range(N):
+#     turtle.forward(100)
+#     turtle.right(360/N)# многогранник
+# turtle.mainloop()
+# turtle.penup()
+# turtle.goto(-100,-200)
+# turtle.pendown()
+import turtle as t
+N =5
+# for i in range(N):
+#     t.forward(100)
+#     t.right(360/N)# многогранник
+# t.mainloop()
+# t.penup()
+# t.goto(-100,-200)
+# t.pendown()
+# for _ in range(N):
+#     t.circle(100)
+#     t.right(360/N)
+# t.mainloop()
+# for _ in range(N):
+#     for _ in range(4):
+#         t.forward(100)
+#         t.right(90)
+#     t.right(360//N)
+# t.mainloop()
+t.speed(0)
+# def square():
+#     for _ in range(4):
+#         t.forward(150)
+#         t.right(90)
+# square()
+#
+# def flower():
+#     for _  in range(36):
+#         t.circle(50)
+#         t.right(10)
+# flower()
+# colors = ['red','purple','blue','green','yellow','green','white']
+# t.bgcolor('black')
+# angle = 59
+# for x in range(200):
+#     t.pencolor(colors[x% len(colors)])
+#     t.width(x//100+1)
+#     t.forward(x)
+#     t.left(angle)
+############################
+# фрвктал
+######################
+# def tree (lenght):
+#     if lenght < 10:
+#         return
+#     t.forward(lenght)
+#     t.left(30)
+#     tree(lenght * 0.7)
+#     t.right(60)# можно изменить будет по другому left
+#     tree(lenght * 0.7)
+#     t.left(30)
+#     #tree(lenght * 0.7) будет больше веток
+#     t.backward(lenght)
+# t.left(90)
+# tree(100)
+# дз в телеграме
+# распарисл??? помотри что это
