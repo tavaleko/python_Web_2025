@@ -145,10 +145,49 @@ fruits = ['слива','банан','ананас','яблоко']
 # ctrl + d консоль в pycharp(параметры системной среды puth) системное окружение
 # ctrl + d консоль в pycharp(параметры системной среды puth) системное окружение
 ###############################
-# import sys
-#
-# for line in sys.stdin:
+import sys
+#for line in sys.stdin:
 #     print(line) # после этого можно печатать внизу в консоли выйти из нее можно ctrl + d
 # data=sys.stdin.readlines()
 # data = [d.strip('\n')for d in data]
-# print(data)#можно скопировать текст в консоль его увидет програма после ввода сначала нажимаю enter потом ctrl + d
+# print(data)# можно скопировать текст в консоль его увидет програма после ввода сначала нажимаю enter потом ctrl + d
+# # вытащить фразу из потока раз два три другая строка ёлочка гори
+# data = [d.strip('\n')for d in sys.stdin.readlines()]
+# print(data)
+# temp = [] # индекс строки в data и число слов в виде кортежей
+# for i, s in enumerate(data):
+#     temp.append((i,len(s.split())))
+#     print(temp)
+# temp.sort(key=lambda x:x[1])
+# print(temp)
+# #[(1, 2), (0, 3)]
+# index =temp[0][0]
+# res = sorted(data[index].split())
+# print(*res, sep='-')
+# # гори-ёлочка
+###############################################
+# Рекурсия функция которая вызыват себя(глубина 1000 запросов) пишет stack our floow стек переполнен
+####################################
+# def factorial1(count):#5!=1*2*3*4*5
+#     result = 1
+#     for i in range(2,count + 1):
+#         result *=i
+#     return result
+#
+# for x in range(10):
+#     print(x,factorial1(x))
+#
+# def factorial_rec(x):
+#     if x ==1: # базовый
+#         return 1 # вариант
+#     return x * factorial_rec(x-1) # рекурсивная пружина
+#
+# print(factorial_rec(6))
+# def factorial_rec(x): # первым делом определяем как выходить из рекурсии вечный цикл
+#     if x == 1 or x==0:
+#         return 1 # вариант
+#     return x * factorial_rec(x-1) # рекурсивная пружина(если нельзя обойтись без рекурсии лучше без рекурсии)
+#
+# print(factorial_rec(0))
+# фрактал!!!!
+
