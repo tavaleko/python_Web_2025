@@ -256,7 +256,7 @@ t.speed(0)
 #     t.forward(x)
 #     t.left(angle)
 ############################
-# фрвктал
+# фрактал
 ######################
 # def tree (lenght):
 #     if lenght < 10:
