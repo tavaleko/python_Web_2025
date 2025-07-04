@@ -195,25 +195,25 @@
 ########################
 # thumbnail (скрип)
 ######################
-from PIL import Image
-
-image = Image.open('images/python.jpg')
-print(image) #<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=800x600 at 0x25A83D7DC10>
-print(image.size)#(800, 600) возвращает кортеж
-# делаем распоковку
-x,y = image.size
-mode = image.mode
-pixels = image.load()# загрузить таблицу пикселей
-# y растет сверху в низ, х растет в слева на право как в декарте
-print(f'Ширина = {x}, высота = {y}')
-print(f'Цветовая схема: {mode}')
-# for i in range(x):
-#     for j in range(y):
-#         r,g,b = pixels[i,j]
-#         pixels[i,j] = b,r,g
-
-image.save('images/python2.jpg')# все собой представляет RGB кортеж
-# негатив инвертируем пиксили
+# from PIL import Image
+#
+# image = Image.open('images/python.jpg')
+# print(image) #<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=800x600 at 0x25A83D7DC10>
+# print(image.size)#(800, 600) возвращает кортеж
+# # делаем распоковку
+# x,y = image.size
+# mode = image.mode
+# pixels = image.load()# загрузить таблицу пикселей
+# # y растет сверху в низ, х растет в слева на право как в декарте
+# print(f'Ширина = {x}, высота = {y}')
+# print(f'Цветовая схема: {mode}')
+# # for i in range(x):
+# #     for j in range(y):
+# #         r,g,b = pixels[i,j]
+# #         pixels[i,j] = b,r,g
+#
+# image.save('images/python2.jpg')# все собой представляет RGB кортеж
+# # негатив инвертируем пиксили
 # инверсия неготив
 # for i in range(x):
 #     for j in range(y):
@@ -248,3 +248,27 @@ image.save('images/python2.jpg')# все собой представляет RGB
 # ratio = x//y # только целочисленное деление
 # resized = image.resize((400,300))
 # resized.save('images/python2.jpg')# сжатие расширение пропорции соблюдаем мы! уменьшаем увеличиваем
+#########################################
+# Pillow drawing- как рисовать
+from PIL import Image, ImageDraw
+
+image = Image.new('RGB',(600,400),(0,0,255))
+draw = ImageDraw.Draw(image)
+draw.line((0,0,600,400),fill=(255,0,0),width=5)
+RED = (255,0,0)
+draw.line((600,0,0,400),fill=RED,width=5)
+draw.rectangle((10,10, 590,390),outline=RED,width=10)
+draw.ellipse((8,8, 550,350),outline=RED,width=10)
+# коды цветов https://colorscheme.ru/html-colors.html?ysclid=mcots3rdx9171568779
+#Текст
+draw.text((150,50),'Текст', fill=RED)
+#Полигон
+POLI = [
+    (150,150),
+    (320,150),
+    (580,400)
+]
+draw.polygon(POLI, outline='green',width=15)
+image.save('images/blue.jpg')
+# Голубое небо 600 на 400 в углу солнце выглядывать и написать солнечный день
+
