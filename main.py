@@ -242,3 +242,9 @@ image.save('images/python2.jpg')# все собой представляет RGB
 #
 # cropped = image.crop((250,0,550,300))# обрезаем рисунок
 # cropped.save('images/python2.jpg')# обрезаем рисунок
+#################
+# расширение сжатия
+# x, y = image.size
+# ratio = x//y # только целочисленное деление
+# resized = image.resize((400,300))
+# resized.save('images/python2.jpg')# сжатие расширение пропорции соблюдаем мы! уменьшаем увеличиваем
