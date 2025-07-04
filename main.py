@@ -273,7 +273,7 @@ t.speed(0)
 # tree(100)
 # дз в телеграме
 # распарисл??? помотри что это
-# домашняя работа
+# домашняя работа текст в телеграмм только на этот текст решение
 strings = [d.strip('\n')for d in sys.stdin.readlines()]
 lenght = len(strings)
 rem = lenght % 3
