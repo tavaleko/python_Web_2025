@@ -179,3 +179,16 @@
 ### pip.exe
 ### file-> tools-> Sync ->requirements.txt
 ##############################
+## ВНЕШНИЕ БИБЛИОТЕКИ
+##Графика
+## PIL -Python Imagine Library(растровые изображения еще бывают векторные)
+## pip install pillow
+## pip.exe
+### pip freeze >requirements.txt создает сайла зависимости заморозка
+# pip install -r requirements.txt устанавливает все библиотеки из requirements.txt
+# синхронгизация file-> tools-> Syns Python ->requirements.txt(там все рухнет перед этим лучше комитить)
+# RGB -> 0 ДО 256 (растровые изображения)
+####################################
+# загрузить фото в python
+# new-> Directory-> назовем image
+# нажимаем image -> Open in -> Explorer-> откроется рабочий стол -> перетащить рисунок
