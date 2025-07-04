@@ -271,4 +271,6 @@ POLI = [
 draw.polygon(POLI, outline='green',width=15)
 image.save('images/blue.jpg')
 # Голубое небо 600 на 400 в углу солнце выглядывать и написать солнечный день
-
+image = Image.new('RGB',(600,400),(135,206,250))
+draw.ellipse((90,9, 500,40),outline='yellow',width=10)
+image.save('images/light_blue.jpg')
