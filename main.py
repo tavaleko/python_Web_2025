@@ -273,3 +273,18 @@ t.speed(0)
 # tree(100)
 # дз в телеграме
 # распарисл??? помотри что это
+# домашняя работа
+strings = [d.strip('\n')for d in sys.stdin.readlines()]
+lenght = len(strings)
+rem = lenght % 3
+
+if rem:
+    strings = strings[:lenght -rem]# отрезаем
+for x in range(0,lenght - rem, 3):# просто перебираеет тройки строк
+    summ = sum(len(a) for a in strings[x:x + 3])# sum([1,2,3]) применима только для списков!!!! выдаст 6
+    result= []
+    for s in strings[x:x +3]:
+        temp = s.lower().split()
+        result += filter(lambda a: len(a) % 2 ==summ % 2, temp)
+    result = sorted(set(map(lambda b:b.capitalize(), result)))[:5]
+    print((*result, sep='. '))
