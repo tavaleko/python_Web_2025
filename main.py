@@ -222,10 +222,23 @@ image.save('images/python2.jpg')# все собой представляет RGB
 #
 # image.save('images/python2.jpg')# все собой представляет RGB кортеж
 # # Grayscale
-for i in range(x):
-    for j in range(y):
-        r,g,b = pixels[i,j]
-        average = (r+b+g)//3
-        pixels[i,j] = average,average, average# серая картинка
-
-image.save('images/python2.jpg')# все собой представляет RGB кортеж
+# for i in range(x):
+#     for j in range(y):
+#         r,g,b = pixels[i,j]
+#         average = (r+b+g)//3
+#         pixels[i,j] = average,average, average# серая картинка
+#
+# image.save('images/python2.jpg')# все собой представляет RGB кортеж
+##########################
+# поворот картинки
+# image_rotate = image.rotate(60)
+#
+# image_rotate.save('images/python2.jpg')  # все собой представляет RGB кортеж
+# # Перевернёт рисунок
+# image_flip = image.transpose(Image.Transpose.FLIP_LEFT_RIGHT)#FLIP_UP_DOWN верх ногами
+# image_flip.save('images/python2.jpg')# перевернутый рисунок
+###################################
+## обрезать рисунок
+#
+# cropped = image.crop((250,0,550,300))# обрезаем рисунок
+# cropped.save('images/python2.jpg')# обрезаем рисунок
