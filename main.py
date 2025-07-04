@@ -192,4 +192,24 @@
 # загрузить фото в python
 # new-> Directory-> назовем image
 # нажимаем image -> Open in -> Explorer-> откроется рабочий стол -> перетащить рисунок
+########################
 # thumbnail (скрип)
+######################
+from PIL import Image
+
+image = Image.open('images/python.jpg')
+print(image) #<PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=800x600 at 0x25A83D7DC10>
+print(image.size)#(800, 600) возвращает кортеж
+# делаем распоковку
+x,y = image.size
+mode = image.mode
+pixels = image.load()# загрузить таблицу пикселей
+# y растет сверху в низ, х растет в слева на право как в декарте
+print(f'Ширина = {x}, высота = {y}')
+print(f'Цветовая схема: {mode}')
+for i in range(x):
+    for j in range(y):
+        r,g,b = pixels[i,j]
+        pixels[i,j] = b,r,g
+
+image.save('images/python2.jpg')# все собой представляет RGB кортеж
