@@ -192,3 +192,4 @@
 # загрузить фото в python
 # new-> Directory-> назовем image
 # нажимаем image -> Open in -> Explorer-> откроется рабочий стол -> перетащить рисунок
+# thumbnail (скрип)
