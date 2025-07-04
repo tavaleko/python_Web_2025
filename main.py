@@ -207,9 +207,25 @@ pixels = image.load()# загрузить таблицу пикселей
 # y растет сверху в низ, х растет в слева на право как в декарте
 print(f'Ширина = {x}, высота = {y}')
 print(f'Цветовая схема: {mode}')
+# for i in range(x):
+#     for j in range(y):
+#         r,g,b = pixels[i,j]
+#         pixels[i,j] = b,r,g
+
+image.save('images/python2.jpg')# все собой представляет RGB кортеж
+# негатив инвертируем пиксили
+# инверсия неготив
+# for i in range(x):
+#     for j in range(y):
+#         r,g,b = pixels[i,j]
+#         pixels[i,j] = 255-b,255-r,255-g
+#
+# image.save('images/python2.jpg')# все собой представляет RGB кортеж
+# # Grayscale
 for i in range(x):
     for j in range(y):
         r,g,b = pixels[i,j]
-        pixels[i,j] = b,r,g
+        average = (r+b+g)//3
+        pixels[i,j] = average,average, average# серая картинка
 
 image.save('images/python2.jpg')# все собой представляет RGB кортеж
