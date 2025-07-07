@@ -287,7 +287,44 @@ fo = open('info.txt','rt',encoding='utf-8')
 # #################
 # ОТкрытие с менеджером контекста
 ######################################
-with open('info.txt','rt',encoding='utf-8') as fo:
-text = fo.read()
-lst =text.splitlines()
-print(lst)# проследит чтобы файл закрылся
+# with open('info.txt','rt',encoding='utf-8') as fo:
+# text = fo.read()
+# lst =text.splitlines()
+# print(lst)# проследит чтобы файл закрылся
+######################################
+# File и os модуль операционой системы
+import os
+# Мягкое создание дириктории (вместо mkdirs)
+# os.mkdir('libs')# новая директория будет создана в корневом каталоге
+# os.makedirs('libs', exist_ok=True)
+# os.rmdir('libs') # удаляет програму
+# print(os.path.exists('libs'))
+# if os.path.exists('libs'): # проверка существования пути
+#     os.rmdir('libs')
+# path = os.getcwd()# get current worcing directory
+# print(path)
+# os.chdir(path +'/images')
+# print(os.getcwd())
+#
+# os.chdir('..'+ path +'/images')
+# print(os.getcwd())
+#
+# os.chdir('..')# стать на ступень выше
+# os.chdir(path +'/fonts')# заглянуть в другую папку опустится в нее
+# print(os.getcwd())
+
+#получить список всех файлов имажес
+# path = os.getcwd()
+# os.chdir(path +'/images')
+# all_files = [f for f in os.listdir('.')]
+# print(all_files)
+
+path = os.getcwd()
+os.chdir(path +'/images')
+all_files = [f for f in os.listdir('.') if f.endswith('.jpg')]
+print(all_files)
+
+path = os.getcwd()
+os.chdir(path +'/images')
+all_files = [f for f in os.listdir('.') if f.startswith('py')]
+print(all_files)
