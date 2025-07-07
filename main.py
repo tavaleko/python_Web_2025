@@ -327,4 +327,5 @@ print(all_files)
 path = os.getcwd()
 os.chdir(path +'/images')
 all_files = [f for f in os.listdir('.') if f.startswith('py')]
+os.chdir('..')# обязательно надо поднятся из дириктории в корневыю систему, чтоб не заблудиться
 print(all_files)
