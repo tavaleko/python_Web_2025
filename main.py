@@ -193,3 +193,23 @@ import lib
 # # from . lib import summ - из текущей дериктории
 # # from ..lib import summ - уровнем выше
 # # from .lib import summ - относительный импорт
+###############################################
+# # пакет
+
+# # file- new - python package - название задаем
+############################################
+# from package_1.module import greet
+# print(greet('Мир!'))
+# import package_1
+# from package_1.module import * # * означает __all__  все функции к которым можно обращаться
+# from package_1 import greet # это относительный импорт
+# ### init__.py нужен для 2 вещей определить версию пакета
+# ## эта публичная функция
+# # есть скрытые функции для внутреннего пользования
+
+from package_1 import greet, add
+
+print(greet('Мир!'))
+print(add(3,7))
+print('Автор', __author__)# подумать!!! как вывести автора это домашняя
+# методичка модули!!! посмотреть
