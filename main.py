@@ -125,6 +125,8 @@ from openpyxl import Workbook # ЭТО КОНСТРУКТОР
 # ws = wb.active
 # ws.title = 'Отчет'
 # wb.save('doc/report.xlsx') # readind butten в самом низу (с помощью текста открывать нельзя)
+# если не правильно выбрала то меню - settings - editor - file types - files opened -file name нажать на плюс и
+# добавить формат в данном случае xlsx
 
 ###########################
 # Запись данных в существующих данных
