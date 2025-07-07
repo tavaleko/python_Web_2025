@@ -120,9 +120,74 @@ from docx import Document
 #####################################
 # Пустой документ
 from openpyxl import Workbook # ЭТО КОНСТРУКТОР
+#
+# wb = Workbook() # wb - Workbook
+# ws = wb.active
+# ws.title = 'Отчет'
+# wb.save('doc/report.xlsx') # readind butten в самом низу (с помощью текста открывать нельзя)
 
-wb = Workbook() # wb - Workbook
-ws = wb.active
-ws.title = 'Отчет'
-wb.save('doc/report.xlsx') # readind butten  самом низу (с помощью текста открывать нельзя)
+###########################
+# Запись данных в существующих данных
+from openpyxl import load_workbook
+# Открываем
+# wb = load_workbook('doc/report.xlsx')
+# # Активный лист
+# ws = wb.active # ожно обратится по имени если вы это имя знаете
+# #Способы записи
+# # ws = wb['Отчёт']
+# ws['F1'] ='Привет мир'
+#
+# ws.cell(row=1, column=3,value='Hello')
+# ws.cell(row=3, column=3, value= 'home')
+# ws['A1'] = 'ФИО'
+# ws['B1'] = 'Должность'
+# ws['C1'] = 'Отдел'
+# # данные
+# employees = [
+#     ['Иванов И.И','Менеджер','Продажи'], # список списков
+#     ['Петров П.П','Бухгалтер','Финансы'],
+#    ['Сидорова С.С','Аналитик','IT'],
+# ]
+# for row, data in enumerate(employees, start = 2):
+#     ws.cell(row = row, column=1, value= data[0])
+#     ws.cell(row=row, column=2, value=data[1])
+#     ws.cell(row=row, column=3, value=data[2])
+#
+# wb.save('doc/newtable.xlsx')
+###################################
+# Чтение данных
+# wb = load_workbook('doc/newtable.xlsx')
+# ws = wb.active
+# # число заполненых строк
+# row_couns = ws.max_row # обращаемся к рабочему листу
+# for row in ws.iter_rows(values_only=True):
+#
+#     print(row)
+# row_couns = ws.max_row # обращаемся к рабочему листу
+# for row in ws.iter_rows(values_only=True):
+#     fio, pos, dept = row
+#     print(f'Фамилия:{fio}, Должность: {pos}, Отдел: {dept}')
+#
+# # Робота с формулами:
+# for openpyxl import  Font,
+#     ws = wb.active
+# ws['A1'].font = Font(bold .....)# =SUM(A1:A10)
+###################################################
+# Пишем и подключаем свои модули мы создали доп файл lib и в нее записали две функции
+import lib
 
+# lib.diff()
+#
+# from lib import diff
+# a=7
+# print(diff(7,3)) # вывел 4
+#
+# print(type(a).__name__)
+#
+# print(__name__)
+#
+# ###
+# # if __name__ == '__main__'
+# # from . lib import summ - из текущей дериктории
+# # from ..lib import summ - уровнем выше
+# # from .lib import summ - относительный импорт
