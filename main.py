@@ -59,8 +59,12 @@
 # #############################
 #Документы
 # word - DOCX(python-docx)
-#pip freeze > requirement.txt
+# pip install python docx # на консоли
+# pip freeze > requirement.txt
 # pip install -r requirement.txt
+# Word - DOCX (docxtpl)
+# pip freeze > requirements.txt - создание файла зависимости
+# pip install -r requirements.txt - установка списка библиотек
 ###########p##############################
 # документы по шаблону(template.docx)
 from docx import Document
@@ -92,17 +96,26 @@ from docx import Document
 # doc.add_paragraph()
 # doc.add_picture('images/sunny_day.jpg',width = Mm(100))
 # doc.save('docs/report.docx')
-from docxtpl import DocxTemplate
+#####################################
+# pip install python docxtpl # на консоли
+#######################################
+# from docxtpl import DocxTemplate
+#
+# #Загрузка шаблона
+# doc = DocxTemplate('doc/template(1).docx')
+# #Word - Docx(docxtpl)
+#
+# content = {
+#     'company': 'ООО Монолит',
+#     'employee': 'Петров Д.И',
+#     'position': 'Менеджер',
+#     'date':'01/01/2025',
+# }
+# doc.render(content)
+# doc.save('doc/about.docx')
+#############################
+#Внешние библиотеки
+#exel
+# pip install openpyxl # на консоли
+#####################################
 
-#Загрузка шаблона
-doc = DocxTemplate('docs/template.docx')
-#Word - Docx(docxtpl)
-
-content = {
-    'company': 'ООО Монолит',
-    'employee': 'Петров Д.И',
-    'position': 'Менеджер',
-    'date':'01/01/2025',
-}
-doc.render(content)
-doc.save('docs/about.docx')
