@@ -262,8 +262,9 @@ fo = open('info.txt','rt',encoding='utf-8')
 # #fo.write('Хороший текст.')# он будет добавлять это в конеч столько раз сколько мы запустим программу
 #
 # # print(*args, sep ='',end='\n', file=None, flush =)
-text = fo.read()
-# вот ещё одна строка.', file=fo)
+# text = fo.read()
+# fo.write(' Хороший текст.')
+# print('\nА вот ещё одна строка.', file=fo)# проверь а то потеряла кучу
 # text = fo.readline()
 # # print(text)
 # # text =fo.readline()
@@ -273,12 +274,20 @@ text = fo.read()
 #     print(text.rstrip('\n'))
 # fo.close()
 # Построчное чтение № 2
-lst = fo.readlines()
-print(lst)
-lst = list(map(lambda x: x.strip('\n'),lst))
-fo.close()
-# Построчное чтение № 3
-fo = open('info.txt','rt',encoding='utf-8')
+# lst = fo.readlines()
+# print(lst)
+# lst = list(map(lambda x: x.strip('\n'),lst))
+# fo.close()
+# # Построчное чтение № 3
+# fo = open('info.txt','rt',encoding='utf-8')
+# text = fo.read()
+# lst = text.splitlines()
+# print(lst)
+# fo.close()
+# #################
+# ОТкрытие с менеджером контекста
+######################################
+with open('info.txt','rt',encoding='utf-8') as fo:
 text = fo.read()
-lst = text.splitlines()
-print(lst)
+lst =text.splitlines()
+print(lst)# проследит чтобы файл закрылся
