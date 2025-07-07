@@ -34,6 +34,7 @@
 # image.save('images/sunny_day.jpg')
 #################################################
 #from PIL import Image, ImageDraw, ImageFont
+from itertools import count
 
 # convert and paste
 ################################################
@@ -119,7 +120,7 @@ from docx import Document
 # pip install openpyxl # на консоли
 #####################################
 # Пустой документ
-from openpyxl import Workbook # ЭТО КОНСТРУКТОР
+# from openpyxl import Workbook # ЭТО КОНСТРУКТОР
 #
 # wb = Workbook() # wb - Workbook
 # ws = wb.active
@@ -130,7 +131,7 @@ from openpyxl import Workbook # ЭТО КОНСТРУКТОР
 
 ###########################
 # Запись данных в существующих данных
-from openpyxl import load_workbook
+# from openpyxl import load_workbook
 # Открываем
 # wb = load_workbook('doc/report.xlsx')
 # # Активный лист
@@ -176,7 +177,7 @@ from openpyxl import load_workbook
 # ws['A1'].font = Font(bold .....)# =SUM(A1:A10)
 ###################################################
 # Пишем и подключаем свои модули мы создали доп файл lib и в нее записали две функции
-import lib
+# import lib
 
 # lib.diff()
 #
@@ -205,11 +206,79 @@ import lib
 # from package_1 import greet # это относительный импорт
 # ### init__.py нужен для 2 вещей определить версию пакета
 # ## эта публичная функция
-# # есть скрытые функции для внутреннего пользования
-
-from package_1 import greet, add
-
-print(greet('Мир!'))
-print(add(3,7))
-print('Автор', __author__)# подумать!!! как вывести автора это домашняя
+# # # есть скрытые функции для внутреннего пользования
+#
+# from package_1 import greet, add
+#
+# print(greet('Мир!'))
+# print(add(3,7))
+# print('Автор', __author__)# подумать!!! как вывести автора это домашняя
 # методичка модули!!! посмотреть
+########################################
+## Файлы - File
+# Файлы- это набор данных сохраненный на носителе содержащий имя,  содержащий определенную структуру и
+# расширение(для виндоус)
+# две группы 1 текстовый файл(HTML), 2 бинарные файлы
+# t - текстовый файл (txt, html( это текст с тегами), xml)
+# b - инарные (jpg, avi, mp3)
+# w - write (запись создается)
+# a - append (запись в конец)
+# r - read  только чтение
+
+############################################
+# fo = open('info.txt','wt')
+# fo = open('info.txt','rt')# если не писать второй признак то. он откроится для чтения
+# fo = open('info.txt','wt', encoding='utf-8')# это для виндоус так как по умолчанию для линекс
+# # wt создать файл
+# # rt только чтение
+# print(fo)
+# print(fo.mode)#wt
+# print(fo.name)#info.txt
+# print(fo.encoding)#utf-8
+#  count = fo.write('Этот текст будет записан в файле')
+# print('В файле записано', count, 'байт!') #В файле записано 26 байт!
+# # fo.close()
+# fo = open('info.txt','rt',encoding='utf-8')
+# text = fo.read() # если не указывать в скобках прочитает всё
+# print('Вот что было в файле',end=': ')# Вот что было в файле: Этот будет записан в файле
+# print(text)
+# fo.close()
+# # каждый файл идет в своём потоке по этому нельзя и читать и писать если на чтение читай ели запись пиши
+# fo = open('info.txt','rt',encoding='utf-8')
+# text = fo.read(3)# прочитает только первые 3 символа
+# print('Вот что было в файле',end=': ')#Вот что было в файле: Это
+# print(text)
+# fo.close()
+#
+fo = open('info.txt','rt',encoding='utf-8')
+# text = fo.read(11) # курсор продолжает читать с того места гле остановился
+# fo.read(6)
+# text += fo.read(7)
+# print('Вот что было в файле',end=': ')# Вот что было в файле: Этот будет записан в файле
+# print(text)
+# fo.close()# файл надо обязательно закрывать
+#
+# fo = open('info.txt','rt',encoding='utf-8')
+# #fo.write('Хороший текст.')# он будет добавлять это в конеч столько раз сколько мы запустим программу
+#
+# # print(*args, sep ='',end='\n', file=None, flush =)
+text = fo.read()
+# вот ещё одна строка.', file=fo)
+# text = fo.readline()
+# # print(text)
+# # text =fo.readline()
+# # print(text)
+#
+# while text := fo.readline():
+#     print(text.rstrip('\n'))
+# fo.close()
+# Построчное чтение № 2
+lst = fo.readlines()
+print(lst)
+lst = list(map(lambda x: x.strip('\n'),lst))
+fo.close()
+# Построчное чтение № 3
+fo = open('info.txt','rt',encoding='utf-8')
+text = fo.read()
+lst = text.splitlines()
+print(lst)
