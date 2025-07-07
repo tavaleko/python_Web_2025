@@ -118,4 +118,11 @@ from docx import Document
 #exel
 # pip install openpyxl # на консоли
 #####################################
+# Пустой документ
+from openpyxl import Workbook # ЭТО КОНСТРУКТОР
+
+wb = Workbook() # wb - Workbook
+ws = wb.active
+ws.title = 'Отчет'
+wb.save('doc/report.xlsx') # readind butten  самом низу (с помощью текста открывать нельзя)
 
