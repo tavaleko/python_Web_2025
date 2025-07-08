@@ -1,50 +1,52 @@
 
-print('mause house "ville"')
-# python enhanced proposal 8
-name = 'Сергей' # string
-surname = 'Петров'
-age = 27
-print('Привет,', name, surname, 'тебе', age, 'лет')
-temperatura = 27
-print('На улице температура,', temperatura, 'градусов.')
-name = input('как тебя зовут: ') # str
-print('Привет,', name)
-print('Приятно познакомиться')
-print()
 
-donut = int(input('стоимость пончика: '))
-cofee = int(input('Стоимость кофе: '))
-#  total = coffee + donut
-# int, float, str
-print('С вас', cofee + donut, 'руб.')
-donut = input('стоимость пончика: ')
-cofee = input('Стоимость кофе: ')
-#  total = coffee + donut
-# int, float, str
-print('С вас', int(cofee) + int(donut), 'руб.')
-donut = float(input('стоимость пончика: '))
-cofee = float(input('Стоимость кофе: '))
-#  total = coffee + donut
-# int, float, str
-print('С вас', cofee + donut, 'руб.')
-a = 35.999
-print(int(a))
-temp = round(a)
-temp = round(a,2)
-temp = round(a,0)
-print(temp)
-screen = 1280 //6
-print(screen)
-number = int(input('Введите число: '))
-print('Число', number, 'заканчивается на', number % 10)
-print('Число'+ str(number) + 'заканчивается на', number % 10)
-""" 
-у лукоморья дуб зеленый
-"""
-temp = """ 
-у лукоморья дуб зеленый
-"""
-number = int(input('Введите число: '))
-print( 'число',number, 'в степени 3 будет', number**3 )
-print( 'квадратный корень от', number, 'будет', number **(1/2))
-print(4/2)# всегда будет float
+# txt =[4,2,4,6,3,5,9,7]
+# txt1 =[5,1,8,2,6,8,1,2]
+# txt2 =txt + txt1
+# print(sorted(set(txt2)))
+
+# res = []
+# with open(('info.txt','rt')) as f:
+#     while temp := f.readline():
+#         res =temp.split(', ')
+# res = list(map(lambda x: x.rstrip('\n'), res))
+# res = set (res)
+# res = sorted(int(x) for x in res)
+# print(res)
+#  res = []
+
+# with open(('info.txt','rt')) as f:
+#     while temp := f.readline():
+#         res =temp.split(', ')
+# res = set (list(map(lambda x: x.rstrip('\n'), res)))
+# res = sorted(int(x) for x in res)
+# print(res)
+
+# res = []
+# with open(('info.txt','rt')) as f:
+#     while temp := f.readline('\n'):# читаем каждую строку по курсору
+#         res =temp.split(', ')
+#
+# res = sorted(int(x) for x in set(res))
+# print(res)
+############################
+# сериализация  это когда сложная структура которая превращается в последовательность байтов
+# десериализация это последовательность байтов превращаются структуру
+# pickling процесс консирвирования (не безопасный так как может проникнуть вирус в сеть нельзя использовать
+# только на чистые файлы из своего компьютора)
+# сериализация
+# import pickle
+# import pprint
+#
+# d = {
+#     'стол':'table',
+#     'стул':'chair'
+# }# сериализация
+# with open('dictfile.dat', 'wb') as p:
+#     # d - что сериализуем, p - куда сериализуем
+#     pickle.dump(d, p)
+#
+# # дессириализация
+# with open('dictfile.dat', 'rb') as p:
+#     d = pickle.load(p)
+# pprint.pprint(d, width=15)
