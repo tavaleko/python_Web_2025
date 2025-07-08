@@ -403,3 +403,107 @@ from tkinter.font import names
 # Arguments: --max-complexity 10 $FileDir$/$FileName$
 # Path: $FileDir$
 # Advanced Options/OutputFilter: $FILE_PATH$:$LINES$
+######################################################
+# Регулярные выражения(поиск по паттерну)
+# Regular Expressions ---(re)
+# r-строка -raw-string(сырая строка)
+# Кватнификаторы!
+# https://alice.yandex.ru/
+#####################################################
+import re
+# pattern = '20'
+# test_string = '10 плюс 20, будет 30'
+#
+# result = re.search(pattern, test_string)
+# print(result)
+#
+# pattern1 = r'\а\п\р'# сырая строка
+# test_string1 = '10 плюс 20, будет 30'
+# result1 = re.search(pattern1, test_string1)
+# print(result1)
+# pattern = r'\b\w{4}\b'# вычленяем слова
+# test_string = '10 плюс 20, будет 30'
+# result = re.search(pattern, test_string)
+# print(result)
+
+# pattern = r'\b\w{4}\b'# вычленяем слова
+# test_string = '10 плюс 20, будет 30'
+# result = re.findall(pattern, test_string)
+# print(result)#['плюс']
+#
+# pattern = r'\b\w{4}\b'# вычленяем слова из 4 х символов
+# test_string = 'дома было холодно'
+# result = re.findall(pattern, test_string)
+# print(result)#['дома', 'было']
+#########################################
+#тернарный if(ternary if)
+
+import re
+# pattern = r'\d'#
+# test_string = 'телефон 112'
+# result = re.findall(pattern, test_string)
+# print(result)#['1', '1', '2']
+#
+# import re
+# pattern = r'\d'# найдет все цифры
+# test_string = '12телефccv56он 112'#
+# result = re.findall(pattern, test_string)
+# # print(result)#['1', '2', '5', '6', '1', '1', '2']
+# #тернарный if(ternary if)
+# print('Цифры есть') if result else print('Цифр нет')#разбивает на три части присвоение делать нельзя 1печать2if3 else
+#
+# import re
+# pattern = r'\d{3}'# найдет все цифры которые подряд3
+# test_string = '12телефccv56он 112'#
+# result = re.findall(pattern, test_string)
+# print(result)#['112']
+# #тернарный if(ternary if)
+# #print('Цифры есть') if result else print('Цифр нет')#разбивает на три части присвоение делать нельзя 1печать2if3 else
+
+pattern = r'начало!\Z'# на что заканчивается
+test_string = 'Главное начало!'#
+result = re.findall(pattern, test_string)
+print(result)#['начало!']
+
+pattern = r'[0-5][0-9]'# две идущие подряд
+test_string = 'Время- 07:45'#
+result = re.findall(pattern, test_string)
+print(result)#['07', '45']
+
+pattern = r'[0-5][0-9]'
+test_string = 'Время- 07:65'#
+result = re.findall(pattern, test_string)
+print(result)#['07']
+
+pattern = r'[а-яА-я]'# все буквы от а до я и от А до Я
+test_string = 'Время- 07:65'#
+result = re.findall(pattern, test_string)
+print(result)#['В', 'р', 'е', 'м', 'я']
+
+pattern = r'[^ерм]'# ВЫВЕСТИ ВСЁ НЕ ВКЛЮЧАЯ ерм ^- исключить символы
+test_string = 'Время- 07:65'#
+result = re.findall(pattern, test_string)
+print(result)#['В', 'я', '-', ' ', '0', '7', ':', '6', '5']
+
+
+pattern = r'\((.+?)\)'# вытащить текст из скобок(групировка .+? любой символ повторяющийся любое колличество раз)
+test_string = 'Поиск по образцу (pattern)'#
+result = re.findall(pattern, test_string)
+print(result)#['pattern']
+#{m}- ровно m раз
+#{m,}-  m раз и более
+#{m,}-  не более m раз
+#{m,n}-  от m до n (без пробелов)
+# ? от 0 до 1 это аналог записи{0,1}
+# * от нуля до бесконечности (32767) {0,}
+# + от 1 до бесконечности (32767) {0,}
+
+pattern = r'o{2,5}'# o обязательно латинская
+test_string = 'Google, Google, Google,Goooooooooogle,'#
+result = re.findall(pattern, test_string)
+print(result)#['oo', 'oo', 'oo', 'ooooo', 'ooooo']
+
+pattern = r'Go{2,}gle'# o обязательно латинская
+test_string = 'Google, Gooogle, Gogle,Goooooooooogle,'#
+result = re.findall(pattern, test_string)
+print(result)#['Google', 'Gooogle', 'Goooooooooogle']
