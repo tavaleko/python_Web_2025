@@ -50,3 +50,8 @@
 # with open('dictfile.dat', 'rb') as p:
 #     d = pickle.load(p)
 # pprint.pprint(d, width=15)
+from pathlib import *
+
+from paht_lib import img_dir
+
+print(img_dir)# организация пути
