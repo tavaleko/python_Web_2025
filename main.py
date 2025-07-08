@@ -400,3 +400,6 @@ from tkinter.font import names
 #C:\Users\LCIMS1\PycharmProjects\firstProject\.venv\Scripts\flake8.exe
 #--max-complexity 10 $FileDir$/$FileName$
 # main- правой кнопкой мыши-external tools- flake8
+# Arguments: --max-complexity 10 $FileDir$/$FileName$
+# Path: $FileDir$
+# Advanced Options/OutputFilter: $FILE_PATH$:$LINES$
