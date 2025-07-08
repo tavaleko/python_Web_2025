@@ -507,3 +507,4 @@ pattern = r'Go{2,}gle'# o обязательно латинская
 test_string = 'Google, Gooogle, Gogle,Goooooooooogle,'#
 result = re.findall(pattern, test_string)
 print(result)#['Google', 'Gooogle', 'Goooooooooogle']
+# через чат gptубрать все знаки припинания дз
