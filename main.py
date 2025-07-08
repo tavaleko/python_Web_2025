@@ -51,7 +51,28 @@
 #     d = pickle.load(p)
 # pprint.pprint(d, width=15)
 from pathlib import *
+from tkinter.font import names
 
-from paht_lib import img_dir
+# from paht_lib import img_dir
+#
+# print(img_dir)# организация пути
+######################################
+# Работа с исключениями TRY-EXCEPT
 
-print(img_dir)# организация пути
+# print(name) #NameError: name 'name' is not defined. Did you mean: 'names'? это не ошибка это исключение
+# это не ошибка это типовая ситуация которая выбрасывает из программы деление на 0, не соотвествие типа данных
+# fo = open('information.txt')#FileNotFoundError: [Errno 2] No such file or directory: 'information.txt'
+# есть обертка try: execept:
+# try:
+#     fo = open('information.txt')
+# except FileNotFoundError:
+#     print('Такого файла нет')#Такого файла нет то есть в случае исключения можно записать ошибку и она выдаваться не будет
+
+try:
+    fo = open('information.txt')
+    print(fo.read())
+    fo.close()
+except FileNotFoundError:
+    print('Файл не обноружен  и создан с парометрами по умолчанию')#
+    with open('information.txt','wt',encoding='utf-8') as fo:
+        fo.write('По умолчанию')
