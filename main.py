@@ -112,7 +112,7 @@ from tkinter.font import names
 # except FileNotFoundError:# веток ексепт может быть сколько угодно
 #     open('informations.txt', 'wt', encoding='utf-8')
 #     flag = True
-#     print('Файл не обноружен  и создан с парометрами по умолчанию')#
+#     print('Файл не обноружен  и создан с параметрами по умолчанию')#
 #
 # else:
 #     print('Файл открыт успешно. Читаем его и закрываем')
@@ -120,9 +120,9 @@ from tkinter.font import names
 #     fo.close()
 # finally:
 #     if flag:
-#         fo.write('По умолчанию')
-#         fo.close()
-#         print('Продалжаем работать')
+#        fo.write('По умолчанию')
+# #         fo.close()
+# #         print('Продолжаем работать.')
 ###########################################################
 # print('Остаток от деления')
 #
@@ -241,15 +241,162 @@ from tkinter.font import names
 #         print('водить надо только числа')
 #
 
-while True:
-    a = input('ведите первое число: ')
-    b = input('ведите первое число: ')
-    try:
-        res = int(a)/int(b)
-    except ZeroDivisionError:
-        print('На ноль делить нельзя!')
-    except ValueError:
-        print(f'водить надо число')
-    else:
-        print(res)
-        break
+# while True:
+#     a = input('ведите первое число: ')
+#     b = input('ведите первое число: ')
+#     try:
+#         res = int(a)/int(b)
+#     except ZeroDivisionError:
+#         print('На ноль делить нельзя!')
+#     except ValueError:
+#         print(f'водить надо число')
+#     else:
+#         print(res)
+#         break
+##########################################
+# Обучаемый словарь
+# минимальная версия если dict.dat отсутствует
+# import pickle
+# voc = {
+#     'стол':'table',
+#     'стул':'chair',
+# }
+# # функция для распечатки словоря
+# def print_voc():
+#     print('Сейчас словарь содержит: ')
+#     for k,v in voc.items():
+#         print(k, '-',v)# Alt -0151 длинное тире
+#
+#
+# # загружаем словарь из файла
+# try:
+#     with open ('dict.dat', 'rb') as dump_in:
+#         voc = pickle.load(dump_in)
+# except FileNotFoundError:
+#     with open ('dict.dat', 'wb') as dump_out:
+#         pickle.dump((voc, dump_out))
+#     print('Создан минимальный словарь')
+#     print_voc()
+#
+# while True:
+#      temp = input('\n Введите слово для перевода или"# " для завершения: ')
+#      word = temp.strip().lower()
+#      if word == '#' or word == '№':
+#          break
+#      if word in voc.keys():
+#          translate = voc[word]
+#          print(f'Слово "{word}" переводится как {translate}. \n')
+#      else:
+#          print(f'Значение слова {word} отсутствует в словаре.')
+#          newkey =f'А как слово {word} переводится'
+#          newkey += 'Если ни чего не вводите нажмите ENTER, \n'
+#          newkey += 'или введите его здесь: '
+#          new_word = input(newkey)
+#
+#          if new_word != '' or len(new_word) >2:
+#              voc[word] = new_word
+#              print(f'Слово {word} с переводом {new_word} внесено в словарь')
+#          else:
+#              print('Ничего не введено или слишком короткое слово')
+#              continue
+# # сохронить словарь
+# with open ('dict.dat', 'wb') as dump_out:
+#     pickle.dump(voc, dump_out)
+# print('До новых встречь!')
+#
+# import pickle
+#
+# # минимальная версия, если файл dict.dat отсутствует
+# voc = {
+#     'стол': 'table',
+#     'стул': 'chair',
+# }
+#
+#
+# # функция для распечатки словаря
+# def print_voc():
+#     print('Сейчас словарь содержит: ')
+#     for k, v in voc.items():
+#         print(k, '—', v)  # Alt + 0151
+#
+#
+# # загружаем словарь из файла
+# try:
+#     with open('dict.dat', 'rb') as dump_in:
+#         voc = pickle.load(dump_in)
+# except FileNotFoundError:
+#     with open('dict.dat', 'wb') as dump_out:
+#         pickle.dump(voc, dump_out)
+#     print('Создан минимальный словарь: ')
+#     print_voc()
+#
+# while True:
+#     temp = input('\nВведите слово для перевода или "#" для завершения: ')
+#     word = temp.strip().lower()
+#     if word == '#' or word == '№':
+#         break
+#     if word in voc.keys():
+#         translate = voc[word]
+#         print(f'Слово "{word}" переводится как {translate}.\n')
+#     else:
+#         print(f'Значение слова {word} отсутствует в словаре.')
+#         newkey = f'А как слово {word} переводится.\n'
+#         newkey += 'Если ничего не вводите нажмите ENTER,\n '
+#         newkey += 'или введите его здесь: '
+#         new_word = input(newkey)
+#
+#         if new_word != '' or len(new_word) > 2:
+#             voc[word] = new_word
+#             print(f'Слово {word} с переводом {new_word} внесено в словарь')
+#         else:
+#             print('Ничего не введено или слишком короткое слово')
+#             continue
+#
+# # Сохранить словарь
+# with open('dict.dat', 'wb') as dump_out:
+#     pickle.dump(voc, dump_out)
+#
+# print('До новых встреч!!!')
+
+##########################################################
+# Библиотека pymorphy
+# pip install pymorphy3
+# pip install -U pymorphy3-dicts-ru
+#
+###############################################
+# import pymorphy3
+
+# morph = pymorphy3.MorphAnalyzer()
+# print(morph.parse('Дмитрий'))# [Parse(word='дмитрий', tag=OpencorporaTag('NOUN,anim,masc,Name sing,nomn'),
+# normal_form='дмитрий', score=0.985915, methods_stack=((DictionaryAnalyzer(), 'дмитрий', 61, 0),)),
+# Parse(word='дмитрий', tag=OpencorporaTag('NOUN,anim,femn,Name plur,gent'), normal_form='дмитрия',
+# score=0.007042, methods_stack=((DictionaryAnalyzer(), 'дмитрий', 64, 8),)), Parse(word='дмитрий',
+# tag=OpencorporaTag('NOUN,anim,femn,Name plur,accs'), normal_form='дмитрия', score=0.007042,
+# methods_stack=((DictionaryAnalyzer(), 'дмитрий', 64, 10),))]
+
+# from pymorphy3 import MorphAnalyzer
+#
+#
+# form = MorphAnalyzer().parse('бутылка')[0]
+#
+# for btl in reversed(range(99)):
+#     print(f'В холодильнике {btl +1}{form.make_agree_with_number(btl+1).word} пива')
+#     print('Возьмём одну и выпьем')
+#     if btl %10 == 1 and btl != 11:
+#         remain = 'Осталось'
+#     else:
+#         remain = 'Осталось'
+#     print(f' {remain}{btl} {form.make_agree_with_number(btl+1).word}пива')
+######################################################
+# Линтеры -контролирует следование хорошим практикам
+# pip install flake8
+# (flake8-bugbeear- для нахождения логических ошибок в коде)
+# (pep8-naming- проверяет на соответствие pep8)
+# pip install flake8-bugbear pep8-naming
+########################################################
+# file-setting-tools-terminal- shell puth- powershell
+# prrogect- venv-flake 8- равая кнопка мыши абсолютный путь
+#$ where flake8
+#C:\Users\LCIMS1\PycharmProjects\firstProject\.venv\Scripts\flake8.exe
+#--max-complexity 10 $FileDir$/$FileName$
+# main- правой кнопкой мыши-external tools- flake8
