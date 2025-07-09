@@ -1,12 +1,25 @@
 class Car:
-    def __init__(self,brand, model, color):
+    # счетчик машин
+    counter = 0
+    def __init__(self,brand='noname', model='nomodel', color='nocolor'): # для старта значений нужен __init__
+    #в капсулу не кто не лезет
         self.brand = brand#'Skoda'
         self.model = model#'Octavia'
         self.color = color#'red'
         self.engine_on = False
+        Car.counter += 1
+
+    # setters
+    def set_name(self, new_brand='noname', new_model='nomodel', new_color='nocolor'):
+        if brand:
+            self._brand = new_brand
+        if model:
+            self._model = new_model
+        if color:
+            self._brand = new_color
 
     def start_engine(self):
-        self.engine_on = True# он вызывался из нутри капсулы
+        self.engine_on = True# он вызывался из внутри капсулы
 
     def drive_to(self, place):
         if self.engine_on:
@@ -14,11 +27,14 @@ class Car:
         else:
             print('Двигатель не заведен, не едем')
 
-class Person:
-    def __init__(self, name='Bill',age=1):
-        # свойства (поля) класса
-        self._name = name# так правильно
-        self._age = age
+    @staticmethod
+    def get_counter():
+        return Car.counter
+
+    # getter
+    def get_age(self):
+        return self._name
+
 
 
 
@@ -38,6 +54,6 @@ class Person:
             print('Некоректный возраст-',new_age)
 
     # getter
-    def get_age(self):
+    def get_name(self):
         return self._name
 

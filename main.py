@@ -13,6 +13,8 @@
 # # + - от 1 до бесконечности (32767) {1,}
 #
 import re
+from http.client import CannotSendRequest
+
 #
 # # pattern = r'\b\w{4}\b' # все слова из 4 символов
 # # pattern = r'\d' # все цифры от 0 до 9
@@ -338,7 +340,8 @@ import re
 # class Car:
 #     # счетчик машин
 #     counter = 0
-#     def __init__(self,brand='noname', model='nomodel', color='nocolor'):
+#     def __init__(self,brand='noname', model='nomodel', color='nocolor'): # для старта значений нужен __init__
+#     #в капсулу не кто не лезет
 #         self.brand = brand#'Skoda'
 #         self.model = model#'Octavia'
 #         self.color = color#'red'
@@ -346,7 +349,7 @@ import re
 #         Car.counter += 1
 #
 #     def start_engine(self):
-#         self.engine_on = True# он вызывался из нутри капсулы
+#         self.engine_on = True# он вызывался из внутри капсулы
 #
 #     def drive_to(self, place):
 #         if self.engine_on:
@@ -363,3 +366,38 @@ import re
 # car4 =Car()
 # car5 =Car()
 # print('В парке',Car.get_counter(),'машин')
+####################################################
+# инплементация
+#
+# class Clicker:
+#     def __init__(self):
+#         self.counter =0
+#
+#     def click(self):
+#         self.counter += 1
+#
+#     def get_counter(self):
+#         return  self._counter
+#
+#     def reset(self):
+#         self.counter = 0
+#
+# cl = Clicker()
+# cl.click()
+# cl.click()
+# cl.click()
+# print(cl.get_counter())
+
+class Separator:
+    def __init__(self):
+        self.odd = []
+        self.even = [] # не четные
+    def add_num(self, num):
+
+    def get_odd(self):
+        return self.odd
+
+
+    def get_even(self):
+        return self.even
+
