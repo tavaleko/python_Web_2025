@@ -393,6 +393,10 @@ class Separator:
         self.odd = []
         self.even = [] # не четные
     def add_num(self, num):
+        if num %2:
+            self.odd =[]
+            self.even =[]
+
 
     def get_odd(self):
         return self.odd
@@ -401,3 +405,23 @@ class Separator:
     def get_even(self):
         return self.even
 
+s = Separator()
+for i in range(1,20):
+    s.add_num()
+print(s.get_even())
+
+class Sorted:
+    def __init__(self):
+        self.words = []
+    def add_word(self, word):
+        self.words.append(word)
+
+    def result(self):
+        return sorted(self.words, key=lambda x: len(x))
+
+s =Sorted()
+s.add_word('привет')
+s.add_word('привет')
+s.add_word('привет')
+
+print(s.result())
