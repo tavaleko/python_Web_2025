@@ -221,20 +221,71 @@ import re
 # g.hello('Ольга')#Привет, Ольга
 # g.bye()#Пока Мир!
 ###############################################
+# Конструктор
 #Методы классов и анализ предыдущих вызовов
 class Car:
     def __init__(self):
         print('Конструктор вызван')
+
     def start_engine(self):
         self.engine_on = True# присвоен адрес памяти self
 
     def drive_to(self, place):
-        if engine_on:
+        if self.engine_on:
             print(f'Едем в {place}')
         else:
-            print('Двигатель не заведен, не едеим')
+            print('Двигатель не заведен, не едем')
 
 
 car = Car()
 car.start_engine()
 car.drive_to('Город')
+
+class Car:
+    def __init__(self):
+        self.engine_on = False
+
+    def start_engine(self):
+        self.engine_on = True# присвоен адрес памяти self
+
+    def drive_to(self, place):
+        if self.engine_on:
+            print(f'Едем в {place}')
+        else:
+            print('Двигатель не заведен, не едем')
+
+
+car = Car()
+# car.start_engine()
+car.drive_to('Город')
+
+car = Car()
+car.start_engine()
+car.drive_to('Город')
+
+class Car:
+    def __init__(self,brand, model, color):
+        self.brand = brand#'Skoda'
+        self.model = model#'Octavia'
+        self.color = color#'red'
+        self.engine_on = False
+
+    def start_engine(self):
+        self.engine_on = True# он вызывался из нутри капсулы
+
+    def drive_to(self, place):
+        if self.engine_on:
+            print(f'Едем в {place} на {self.brand} {self.model} {self.color}')
+        else:
+            print('Двигатель не заведен, не едем')
+
+
+car = Car('Skoda','Actavia','red')
+car.start_engine()
+car.drive_to('Город')
+
+car2 = Car('noname','nomodel','nocolor')
+car2.start_engine()
+car2.drive_to('Город')
+
+from libs import Car
