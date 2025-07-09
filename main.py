@@ -333,32 +333,33 @@ import re
 # print(p._age)# 1
 # print(p._name)#Bill
 # #metaspace
-
+#########################################################
 # Статичные члены класса
-class Car:
-    # счетчик машин
-    counter = 0
-    def __init__(self,brand, model, color):
-        self.brand = brand#'Skoda'
-        self.model = model#'Octavia'
-        self.color = color#'red'
-        self.engine_on = False
-        Car.counter += 1
-
-    def start_engine(self):
-        self.engine_on = True# он вызывался из нутри капсулы
-
-    def drive_to(self, place):
-        if self.engine_on:
-            print(f'Едем в {place} на {self.brand} {self.model} {self.color}')
-        else:
-            print('Двигатель не заведен, не едем')
-    @staticmethod
-    def get_counter():
-        return Car.counter
-
-car1 =Car()
-car2 =Car()
-car3 =Car()
-
-print(Car.get_counter())
+# class Car:
+#     # счетчик машин
+#     counter = 0
+#     def __init__(self,brand='noname', model='nomodel', color='nocolor'):
+#         self.brand = brand#'Skoda'
+#         self.model = model#'Octavia'
+#         self.color = color#'red'
+#         self.engine_on = False
+#         Car.counter += 1
+#
+#     def start_engine(self):
+#         self.engine_on = True# он вызывался из нутри капсулы
+#
+#     def drive_to(self, place):
+#         if self.engine_on:
+#             print(f'Едем в {place} на {self.brand} {self.model} {self.color}')
+#         else:
+#             print('Двигатель не заведен, не едем')
+#     @staticmethod
+#     def get_counter():
+#         return Car.counter
+#
+# car1 =Car()
+# car2 =Car()
+# car3 =Car()
+# car4 =Car()
+# car5 =Car()
+# print('В парке',Car.get_counter(),'машин')
