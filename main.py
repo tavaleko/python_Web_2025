@@ -406,9 +406,9 @@ class Separator:
         return self.even
 
 s = Separator()
-for i in range(1,20):
-    s.add_num()
-print(s.get_even())
+for i in range(20):
+    s.add_num(i)
+print(s.get_odd())
 
 class Sorted:
     def __init__(self):
@@ -425,3 +425,22 @@ s.add_word('привет')
 s.add_word('привет')
 
 print(s.result())
+
+class Balance:
+    def __init__(self):
+        self.right = 0
+        self.left = 0
+    def add_left(self, weight):
+        pass
+
+    def add_right(self, weight):
+        pass
+    def result(self)->str:
+        return # какая чаша перевесила
+
+b = Balance()
+b.add_left(5)
+b.add_right(5)
+b.add_left(5)
+b.add_left(5)
+print(result)
