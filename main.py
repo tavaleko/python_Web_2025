@@ -223,52 +223,127 @@ import re
 ###############################################
 # Конструктор
 #Методы классов и анализ предыдущих вызовов
-class Car:
-    def __init__(self):
-        print('Конструктор вызван')
-
-    def start_engine(self):
-        self.engine_on = True# присвоен адрес памяти self
-
-    def drive_to(self, place):
-        if self.engine_on:
-            print(f'Едем в {place}')
-        else:
-            print('Двигатель не заведен, не едем')
-
-
-car = Car()
-car.start_engine()
-car.drive_to('Город')
-
-class Car:
-    def __init__(self):
-        self.engine_on = False
-
-    def start_engine(self):
-        self.engine_on = True# присвоен адрес памяти self
-
-    def drive_to(self, place):
-        if self.engine_on:
-            print(f'Едем в {place}')
-        else:
-            print('Двигатель не заведен, не едем')
-
-
-car = Car()
+# class Car:
+#     def __init__(self):
+#         print('Конструктор вызван')
+#
+#     def start_engine(self):
+#         self.engine_on = True# присвоен адрес памяти self
+#
+#     def drive_to(self, place):
+#         if self.engine_on:
+#             print(f'Едем в {place}')
+#         else:
+#             print('Двигатель не заведен, не едем')
+#
+#
+# car = Car()
 # car.start_engine()
-car.drive_to('Город')
+# car.drive_to('Город')
+#
+# class Car:
+#     def __init__(self):
+#         self.engine_on = False
+#
+#     def start_engine(self):
+#         self.engine_on = True# присвоен адрес памяти self
+#
+#     def drive_to(self, place):
+#         if self.engine_on:
+#             print(f'Едем в {place}')
+#         else:
+#             print('Двигатель не заведен, не едем')
+#
+#
+# car = Car()
+# # car.start_engine()
+# car.drive_to('Город')
+#
+# car = Car()
+# car.start_engine()
+# car.drive_to('Город')
+#
+# class Car:
+#     def __init__(self,brand, model, color):
+#         self.brand = brand#'Skoda'
+#         self.model = model#'Octavia'
+#         self.color = color#'red'
+#         self.engine_on = False
+#
+#     def start_engine(self):
+#         self.engine_on = True# он вызывался из нутри капсулы
+#
+#     def drive_to(self, place):
+#         if self.engine_on:
+#             print(f'Едем в {place} на {self.brand} {self.model} {self.color}')
+#         else:
+#             print('Двигатель не заведен, не едем')
+#
+#
+# car = Car('Skoda','Actavia','red')
+# car.start_engine()
+# car.drive_to('Город')
+#
+# car2 = Car('noname','nomodel','nocolor')
+# car2.start_engine()
+# car2.drive_to('Город')
+#
+# # from libs import Car
+#
+# class Person:
+#     def __init__(self, name='Bill',age=1):
+#         self.name = name# так нельзя нельзя обращаться на прямую можно испортить
+#         self.age = age# так нельзя
+# #
+# # p = Person()
+# print(p.age)# 1
+# print(p.name)#Bill
+# ###############################################
+# #Геттеры и сеторы
+# ####################################
+# class Person:
+#     def __init__(self, name='Bill',age=1):
+#         # свойства (поля) класса
+#         self._name = name# так правильно
+#         self._age = age
+#
+#
+#
+#     def person_info(self):
+#         print(f'Человек с именем: {self._name}. Возраст:{self._age}')
+#
+#     #setters
+#     def set_name(self, new_name):
+#         if new_name:
+#             self._name = new_name
+#
+#
+#     def set_age(self, new_age):
+#         if 0< new_age <150:
+#             self._age = new_age
+#         else:
+#             print('Некоректный возраст-',new_age)
+#
+#     # getter
+#     def get_age(self):
+#         return self._name
+#
+# p = Person()
+# p.set_age(548)
+# print(p._age)# 1
+# print(p._name)#Bill
+# #metaspace
 
-car = Car()
-car.start_engine()
-car.drive_to('Город')
-
+# Статичные члены класса
 class Car:
+    # счетчик машин
+    counter = 0
     def __init__(self,brand, model, color):
         self.brand = brand#'Skoda'
         self.model = model#'Octavia'
         self.color = color#'red'
         self.engine_on = False
+        Car.counter += 1
 
     def start_engine(self):
         self.engine_on = True# он вызывался из нутри капсулы
@@ -278,57 +353,12 @@ class Car:
             print(f'Едем в {place} на {self.brand} {self.model} {self.color}')
         else:
             print('Двигатель не заведен, не едем')
+    @staticmethod
+    def get_counter():
+        return Car.counter
 
+car1 =Car()
+car2 =Car()
+car3 =Car()
 
-car = Car('Skoda','Actavia','red')
-car.start_engine()
-car.drive_to('Город')
-
-car2 = Car('noname','nomodel','nocolor')
-car2.start_engine()
-car2.drive_to('Город')
-
-# from libs import Car
-
-class Person:
-    def __init__(self, name='Bill',age=1):
-        self.name = name# так нельзя нельзя обращаться на прямую можно испортить
-        self.age = age# так нельзя
-
-p = Person()
-print(p.age)# 1
-print(p.name)#Bill
-###############################################
-#Геттеры и сеторы
-####################################
-class Person:
-    def __init__(self, name='Bill',age=1):
-        # свойства (поля) класса
-        self._name = name# так правильно
-        self._age = age
-
-
-
-    def person_info(self):
-        print(f'Человек с именем: {self._name}. Возраст:{self._age}')
-
-    #setters
-    def set_name(self, new_name):
-        if new_name:
-            self._name = new_name
-
-
-    def set_age(self, new_age):
-        if 0< new_age <150:
-            self._age = new_age
-        else:
-            print('Некоректный возраст-',new_age)
-
-    # getter
-    def get_age(self):
-        return self._name
-
-p = Person()
-p.set_age(548)
-print(p._age)# 1
-print(p._name)#Bill
+print(Car.get_counter())
