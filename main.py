@@ -288,4 +288,47 @@ car2 = Car('noname','nomodel','nocolor')
 car2.start_engine()
 car2.drive_to('Город')
 
-from libs import Car
+# from libs import Car
+
+class Person:
+    def __init__(self, name='Bill',age=1):
+        self.name = name# так нельзя нельзя обращаться на прямую можно испортить
+        self.age = age# так нельзя
+
+p = Person()
+print(p.age)# 1
+print(p.name)#Bill
+###############################################
+#Геттеры и сеторы
+####################################
+class Person:
+    def __init__(self, name='Bill',age=1):
+        # свойства (поля) класса
+        self._name = name# так правильно
+        self._age = age
+
+
+
+    def person_info(self):
+        print(f'Человек с именем: {self._name}. Возраст:{self._age}')
+
+    #setters
+    def set_name(self, new_name):
+        if new_name:
+            self._name = new_name
+
+
+    def set_age(self, new_age):
+        if 0< new_age <150:
+            self._age = new_age
+        else:
+            print('Некоректный возраст-',new_age)
+
+    # getter
+    def get_age(self):
+        return self._name
+
+p = Person()
+p.set_age(548)
+print(p._age)# 1
+print(p._name)#Bill
