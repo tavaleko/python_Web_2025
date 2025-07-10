@@ -114,59 +114,85 @@ PI = 3.14
 
 
 
-class Person:
-    def __init__(self, name='Bill', age=1):
-        # свойства (поля) класса
-        self._name = name
-        self._age = age
+# class Person:
+#     def __init__(self, name='Bill', age=1):
+#         # свойства (поля) класса
+#         self._name = name
+#         self._age = age
+#
+#     # setters
+#     def set_name(self, new_name):
+#         if new_name:
+#             self._name = new_name
+#
+#     def set_age(self, new_age):
+#         if 0 < new_age < 150:
+#             self._age = new_age
+#         else:
+#             print('Некорректный возраст — ', new_age)
+#
+#     # getters
+#     def get_name(self):
+#         return self._name
+#
+#     def get_age(self):
+#         return self._age
+#
+#     def person_info(self):
+#         print(f'Человек с именем {self._name}. Возраст: {self._age}')
+#
+# class Student:
+#     def __init__(self, name='Bill', univ=''):
+#         self._name = name
+#         self._univercity = univ
+#
+#     def get_univercity():
+#
+# class Employee:
+#     def __init__(self, name='Bill', comp=''):
+#         self._name = name
+#         self._company = comp
+#
+#     def get_company():
+#
+#
+# people = [
+#     Person('Александр', 27),
+#     Student('Дмитрий','ГУАП'),
+#     Employee('Петр','Авангард'),
+# ]
+#
+# for person in people:
+#     if isinstance(person, Student):
+#         print(person.get_univercity())
+#     elif isinstance(person,Employee):
+#         print(person.get_company())
+#     else:
+#         print(person.get_name())
+#
+lst =list(range(1,15))
+#
+# class Selector:
+#     def __init__(self,vals):
+#         self.values = vals[:] # получаем копию
+#
+#     def get_odd(self):
+#        return [x for x in self.values if x %2 ==1]# остаток от деление True  то есть четные
+#     def get_even(self):
+#         return [x for x in self.values if x % 2 == 0]## остаток от деление False то есть не четные
+#
+#
+# s = Selector(lst)
+# print(s.get_odd())
+# print(s.get_even())
 
-    # setters
-    def set_name(self, new_name):
-        if new_name:
-            self._name = new_name
+class Stat:
+    def __init__(self, vals):
+         self.values = vals[:] # получаем копию
 
-    def set_age(self, new_age):
-        if 0 < new_age < 150:
-            self._age = new_age
-        else:
-            print('Некорректный возраст — ', new_age)
-
-    # getters
-    def get_name(self):
-        return self._name
-
-    def get_age(self):
-        return self._age
-
-    def person_info(self):
-        print(f'Человек с именем {self._name}. Возраст: {self._age}')
-
-class Student:
-    def __init__(self, name='Bill', univ=''):
-        self._name = name
-        self._univercity = univ
-
-    def get_univercity():
-
-class Employee:
-    def __init__(self, name='Bill', comp=''):
-        self._name = name
-        self._company = comp
-
-    def get_company():
-
-
-people = [
-    Person('Александр', 27),
-    Student('Дмитрий','ГУАП'),
-    Employee('Петр','Авангард'),
-]
-
-for person in people:
-    if isinstance(person, Student):
-        print(person.get_univercity())
-    elif isinstance(person,Employee):
-        print(person.get_company())
-    else:
-        print(person.get_name())
-
+    def get_min(self):
+        return
+    def get_max(self):
+        return
+    def get_aver(self):
+        return
