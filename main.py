@@ -614,3 +614,31 @@ lst =list(range(1,15))
 # 	Классы-наследники: Dog, Cat, Elephant с переопределением звуков.
 # 	Класс Zoo хранит список животных и метод make_all_sounds().
 
+# Банковская система
+class BankAccount:
+    def __init__(self, ower, balance=0):
+        self._ower = ower
+        self._balance = balance
+
+    def get_balsnce(self):
+        return self._balance
+
+    def deposite(self, amount):
+        if amount > 0:
+            self._balance += amount
+            print(f'Депозит пополнен на сумму {amount}')
+        else:
+            print(f'Нельзя вносить отрицательную сумму на депозит')
+
+    def withdraw(self, amount):
+        if 0 < amount <= self._balance:
+            self._balance -= amount
+            print(f'C Депозита снята сумма {amount}')
+        else:
+            print(f'Нехватает средств')
+
+
+client1 =BankAccount ('John')
+client1.deposite (500)
+client1.withdraw (600)
+print('Остаток', client1.get_balsnce())
