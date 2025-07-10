@@ -400,35 +400,208 @@ lst =list(range(1,15))
 ## Наследование
 # Класс от которого наследование: базовый, родительский, супер класс
 # Класс, который наследуется дочерний
-class Rectangle:
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        self.name = 'прямоугольник'
+# class Rectangle:
+#     def __init__(self, width, height):
+#         self.width = width
+#         self.height = height
+#         self.name = 'прямоугольник'
+#
+#     def perimetr(self):
+#         return 2 * (self.width + self.height)
+#
+#     def area(self):
+#         return self.width * self.height
+#
+#     def get_name(self):
+#         return self.name
+# class Square(Rectangle):
+#     # можно использовать базовый класс и добавлять что то свое наследований может быть много
+#     def __init__(self, side):
+#         super().__init__(side, side)
+#         self.side = side
+#         self.name = 'квадрат'# сначала берет своё потом уже к классу выше
+# # по-этому пишет имя квадрат если бы не было указано имя писал бы прямоугольник т.к. Rectangle имеет имя прямоугольник
+#
+#     # def perimetr(self):# так как мы использовали супер функцию
+#     #     return 4 * self.side
+#     #
+#     # def area(self):
+#     #     return self.side ** 2
+#     #
+#     # def get_name(self):
+#     #     return self.name
+#
+# s = Square(5)
+# print(s.area())
+# print(s.perimetr())
+#########################################################
+# from math import pi
+# # Shape не нуждается в супер функции так как не несет в себе переменных, если есть переменные обязательно нужет super
+# #  чтобы перенести переменные в нвследующий класс
+# class Shape(object):# object это наивысший класс если ни чего не писать тоже сработает он идёт по умолчанию
+#     def info(self):
+#         print(f'Класс: {self.__class__.__name__}')
+#
+# class Circle(Shape):
+#     def __init__(self, radius):
+#         self.radius = radius
+#         self.name = 'круг'
+#
+#     def perimetr(self):
+#         return round(2 * pi * self.radius, 2)
+#
+#     def area(self):
+#         return round(pi * self.radius ** 2, 2)
+#
+#     def get_name(self):
+#         return self.name
+#
+# class Rectangle(Shape):
+#     def __init__(self, width, height):
+#         self.width = width
+#         self.height = height
+#         self.name = 'прямоугольник'
+#
+#     def perimetr(self):
+#         return 2 * (self.width + self.height)
+#
+#     def area(self):
+#         return self.width * self.height
+#
+#     def get_name(self):
+#         return self.name
+# class Square(Rectangle):# можно добавить через запятую Shape так даже правильнее будет
+#     # можно использовать базовый класс и добавлять что то свое наследований может быть много
+#     def __init__(self, side):
+#         super().__init__(side, side)
+#         self.side = side
+#         self.name = 'квадрат'# сначала берет своё потом уже к классу выше
+# # по-этому пишет имя квадрат если бы не было указано имя писал бы прямоугольник т.к. Rectangle имеет имя прямоугольник
+#
+#     def perimetr(self):# так как мы использовали супер функцию
+#         return 4 * self.side
+#
+#     def area(self):
+#         return self.side ** 2
+#
+#     def get_name(self):
+#         return self.name
+# s = Square(5)
+# print(s.area())
+# print(s.perimetr())
+# s.info()#Класс: Square
+###################################################
+# class Rectangle:
+#     def __init__(self, width, height):
+#         self.width = width
+#         self.height = height
+#         self.name = 'прямоугольник'
+#
+#     def perimetr(self):
+#
+#         return 2 * (self.width + self.height)
+#     def area(self):
+#         return self.width * self.height
+#
+#     def get_name(self):
+#         return self.name
+# class Square(Rectangle):
+#     def __init__(self, side):
+#         super().__init__(side, side)
+#         self.side = side
+#         self.name = 'квадрат'#
+# class Triangle(Square):
+#     def __init__(self, side):
+#         super().__init__(side)#
+#         self.name = 'Треугольник'#
+#
+#     def perimetr(self):
+#         return 3 * (self.side )
+#
+#     def area(self):
+#         return self.side**2 * 3**0.5 / 4
+#
+# tr = Triangle(8)
+# print(tr.area())
+# print(tr.perimetr())
 
-    def perimetr(self):
-        return 2 * (self.width + self.height)
+# class Triangle(Square):
+#     def __init__(self, side):
+#         Square.__init__(self,side)# если нужно использовать несколько наследоваений супер два раза не используют,
+#         # вызывают вторую функцию ее названием только обязательно писать в скобках self
+#         self.side = side
+#         self.name = 'Треугольник'#
+#
+#     def perimetr(self):
+#         return 3 * (self.side )
+#
+#     def area(self):
+#         return self.side**2 * 3**0.5 / 4
+#
+# tr = Triangle(8)
+# print(tr.area())
+# print(tr.perimetr())
 
-    def area(self):
-        return self.width * self.height
-
-    def get_name(self):
-        return self.name
-class Square(Rectangle):
-    def __init__(self, side):
-        super.__init__(side,side)
-        self.side = side
-        self.name = 'квадрат'
-
-    def perimetr(self):
-        return 4 * self.side
-
-    def area(self):
-        return self.side ** 2
-
-    def get_name(self):
-        return self.name
-
-s = Square(5)
-print(s.area())
-print(s.perimetr())
+############################################
+# # так можно делать по правильномуу если есть наследование вызывая эту библиотеку
+# from abc import ABC, abstractmethod
+# class Shape(object):#
+#     @abstractmethod
+#     def info(self):
+#         print(f'Класс: {self.__class__.__name__}')
+#
+#     @abstractmethod
+#     def area(self):
+#         pass
+#
+#     @abstractmethod
+#     def perimetr(self):
+#         pass
+# class Circle(Shape):
+#     def __init__(self, radius):
+#         self.radius = radius
+#         self.name = 'круг'
+#
+#     def perimetr(self):
+#         return round(2 * pi * self.radius, 2)
+#
+#     def area(self):
+#         return round(pi * self.radius ** 2, 2)
+#
+#     def get_name(self):
+#         return self.name
+#
+# class Rectangle(Shape):
+#     def __init__(self, width, height):
+#         self.width = width
+#         self.height = height
+#         self.name = 'прямоугольник'
+#
+#     def perimetr(self):
+#         return 2 * (self.width + self.height)
+#
+#     def area(self):
+#         return self.width * self.height
+#
+#     def get_name(self):
+#         return self.name
+# class Square(Rectangle):# можно добавить через запятую Shape так даже правильнее будет
+#     # можно использовать базовый класс и добавлять что то свое наследований может быть много
+#     def __init__(self, side):
+#         super().__init__(side, side)
+#         self.side = side
+#         self.name = 'квадрат'# сначала берет своё потом уже к классу выше
+# # по-этому пишет имя квадрат если бы не было указано имя писал бы прямоугольник т.к. Rectangle имеет имя прямоугольник
+#
+#     def perimetr(self):# так как мы использовали супер функцию
+#         return 4 * self.side
+#
+#     def area(self):
+#         return self.side ** 2
+#
+#     def get_name(self):
+#         return self.name
+# s = Square(5)
+# print(s.area())
+# print(s.perimetr())
+# s.info()#Класс: Square
