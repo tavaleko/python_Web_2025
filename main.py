@@ -147,6 +147,7 @@ PI = 3.14
 #         self._univercity = univ
 #
 #     def get_univercity():
+#         return self._univercity
 #
 # class Employee:
 #     def __init__(self, name='Bill', comp=''):
@@ -154,6 +155,7 @@ PI = 3.14
 #         self._company = comp
 #
 #     def get_company():
+#           return self._company
 #
 #
 # people = [
@@ -171,6 +173,7 @@ PI = 3.14
 #         print(person.get_name())
 #
 lst =list(range(1,15))
+# lst += [a]
 #
 # class Selector:
 #     def __init__(self,vals):
@@ -186,13 +189,106 @@ lst =list(range(1,15))
 # print(s.get_odd())
 # print(s.get_even())
 
-class Stat:
-    def __init__(self, vals):
-         self.values = vals[:] # получаем копию
+# class Stat:
+#     def __init__(self, vals):
+#          self.values = vals[:] # получаем копию
+#
+#     def get_min(self):
+#         return [ x for x in self.values if x == 1]
+#     def get_max(self):
+#         return [ x for x in self.values if x == 1]
+#     def get_aver(self):
+#         return [ x for x in self.values if x != 1]
+#
+# s = Stat(lst)
+# print(s.get_min())
+# print(s.get_max())
+# # print(s.get_aver())
+#
+# class Stat:
+#     def __init__(self, vals):
+#          self.values = vals[:] # получаем копию
+#
+#     def is_all_int(self)-> bool:
+#         return all(isinstance(item,int) for item in self.values)
+#
+#     def is_min(self):
+#         if is_int():
+#             return min(self.values)
+#         return None
+#
+#     def is_max(self):
+#         if is_int(self):
+#             return max(self.values)
+#         return None
+#
+#     def get_aver(self):
+#         if self.is_all_int():
+#             return sum(self.values) / len(self.values)
+#         return None
+#
+# s = Stat(lst)
+# print(s.is_int())
+# print(s.is_int())
+# print(s.get_aver())
+##############################################
+### OOP magic methods
+###method override; operator overloading
+class Point:
+    def __init__(self,x=0,y=0):
+        self.x = x
+        self.y = y
 
-    def get_min(self):
-        return
-    def get_max(self):
-        return
-    def get_aver(self):
-        return
+    def __str__(self):
+         return f'<Point: ({self.x},{self.y})>' #<Point: (0,0)>  если без этой строки то вывод ниже
+p =Point()
+print(p)#<__main__.Point object at 0x000001F59E4A9BB0>
+# str(a)-> a.__str__()
+class Point:
+    def __init__(self,x=0,y=0):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+         return f'<Point: ({self.x},{self.y})>'# str  выведет строку
+    def __repr__(self):
+        return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
+p = [Point(),Point() ]
+print(p)#[<Point: (0,0)>, <Point: (0,0)>]
+# str(a)-> a.__str__()
+
+
+
+class Point:
+    def __init__(self,x=0,y=0):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+         return f'<Point: ({self.x},{self.y})>'# str  выведет строку
+    def __repr__(self):
+        return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
+
+    def __sub__(self, other):
+        return Point(abs(self.x -other.x), abs(self.y - other.y))# (abs)абсолютные значения без разницы что из чего вычитать
+
+p1 = Point(5,7)
+p2 = Point(9,12)
+print(p1-p2)#<Point: (4,5)>
+
+from math import gipo
+
+class Point:
+    def __init__(self,x=0,y=0):
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+         return f'<Point: ({self.x},{self.y})>'# str  выведет строку
+    def __repr__(self):
+        return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
+
+    def __add__(self):
+        pass
+    def __sub__(self, other):
+        return Point(abs(self.x -other.x), abs(self.y - other.y))# (abs)абсолютные значения без разницы что из чего вычитать
