@@ -382,6 +382,7 @@ lst =list(range(1,15))
 # t1 = MyTime(13,15)
 # t2 = MyTime(53,25)
 # print(t1 + t2)
+#########################################################
 # Метод __call__ экземпляр класса становится вызываемым как функция
 # Позволяет экземплярам пользовательских типов представляться объектами, поддерживающими вызов. self : Ссылка на экземпляр
 # y = ax^2 + bx + c
@@ -395,4 +396,39 @@ lst =list(range(1,15))
 #
 # s = SquareFunction(1,2,3)
 # print(s(2))
+###########################################################
+## Наследование
+# Класс от которого наследование: базовый, родительский, супер класс
+# Класс, который наследуется дочерний
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+        self.name = 'прямоугольник'
 
+    def perimetr(self):
+        return 2 * (self.width + self.height)
+
+    def area(self):
+        return self.width * self.height
+
+    def get_name(self):
+        return self.name
+class Square(Rectangle):
+    def __init__(self, side):
+        super.__init__(side,side)
+        self.side = side
+        self.name = 'квадрат'
+
+    def perimetr(self):
+        return 4 * self.side
+
+    def area(self):
+        return self.side ** 2
+
+    def get_name(self):
+        return self.name
+
+s = Square(5)
+print(s.area())
+print(s.perimetr())
