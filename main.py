@@ -234,61 +234,165 @@ lst =list(range(1,15))
 ##############################################
 ### OOP magic methods
 ###method override; operator overloading
-class Point:
-    def __init__(self,x=0,y=0):
-        self.x = x
-        self.y = y
+# class Point:
+#     def __init__(self,x=0,y=0):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#          return f'<Point: ({self.x},{self.y})>' #<Point: (0,0)>  если без этой строки то вывод ниже
+# p =Point()
+# print(p)#<__main__.Point object at 0x000001F59E4A9BB0>
+# # str(a)-> a.__str__()
+# class Point:
+#     def __init__(self,x=0,y=0):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#          return f'<Point: ({self.x},{self.y})>'# str  выведет строку
+#     def __repr__(self):
+#         return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
+# p = [Point(),Point() ]
+# print(p)#[<Point: (0,0)>, <Point: (0,0)>]
+# # str(a)-> a.__str__()
+#
+#
+#
+# class Point:
+#     def __init__(self,x=0,y=0):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#          return f'<Point: ({self.x},{self.y})>'# str  выведет строку
+#     def __repr__(self):
+#         return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
+#
+#     def __sub__(self, other):
+#         return Point(abs(self.x -other.x), abs(self.y - other.y))# (abs)абсолютные значения без разницы что из чего вычитать
+#
+# p1 = Point(5,7)
+# p2 = Point(9,12)
+# print(p1-p2)#<Point: (4,5)>
+#
+#
+#
+# class Point:
+#     def __init__(self,x=0,y=0):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#          return f'<Point: ({self.x},{self.y})>'# str  выведет строку
+#     def __repr__(self):
+#         return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
+#
+#     def __add__(self):
+#         return ((self.x -other.x)**2 + (self.y - other.y)**2)**0.5
+#
+# p1 = Point(5,7)
+# p2 = Point(9,12)
+# print(p1+p2)#<Point: (4,5)>
+# шпаргалка по спец методам питона (у алисы) Alice.yandex.ru
+# from math import hypot
+# class Point:
+#     def __init__(self,x=0,y=0):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#          return f'<Point: ({self.x},{self.y})>'# str  выведет строку
+#     def __repr__(self):
+#         return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
+#
+#     def __add__(self,other):
+#         return hypot (self.x -other.x, self.y - other.y)
+#
+# p1 = Point(5,7)
+# p2 = Point(9,12)
+# print(p1 + p2)#
 
-    def __str__(self):
-         return f'<Point: ({self.x},{self.y})>' #<Point: (0,0)>  если без этой строки то вывод ниже
-p =Point()
-print(p)#<__main__.Point object at 0x000001F59E4A9BB0>
-# str(a)-> a.__str__()
-class Point:
-    def __init__(self,x=0,y=0):
-        self.x = x
-        self.y = y
+# class MyTime:
+#     def __init__(self, minutes,seconds):
+#         if 0<= minutes < 60:
+#             self.minutes = minutes
+#         if 0 <= seconds < 60:
+#             self.seconds = seconds
+#
+#     def __str__(self):
+#          return f'<Time: ({self.minutes} : {self.seconds})>'# str  выведет строку
+#          # чтобы между ними была : нужно место , ее поставить
+#     def __repr__(self):
+#         return f'<Time: ({self.minutes},{self.seconds})>'# report представитель он переводит если несколько аргументов
+#
+#
+# t = MyTime(13,15)
+# print(t)
+#
+# #
+#
+# class MyTime:
+#     def __init__(self, minutes,seconds):
+#         if 0<= minutes < 60:
+#             self.minutes = minutes
+#         if 0 <= seconds < 60:
+#             self.seconds = seconds
+#     def __add__(self,other):
+#         m = self.minutes + other.minutes
+#         s = self.seconds + other.seconds
+#         m += s//60
+#         s =s %60
+#         m = m %60
+#         return MyTime(m,s)
+#
+#     def __str__(self):
+#          return f'<Time: ({self.minutes}:{self.seconds})>'# str  выведет строку
+#          # чтобы между ними была : нужно место , ее поставить
+#     def __repr__(self):
+#         return f'<Time: ({self.minutes},{self.seconds})>'# report представитель он переводит если несколько аргументов
+#
+#
+# t1 = MyTime(13,15)
+# t2 = MyTime(53,25)
+# print(t1 + t2)
+#
+#
+# class MyTime:
+#     def __init__(self, minutes,seconds):
+#         if 0<= minutes < 60:
+#             self.minutes = minutes
+#         if 0 <= seconds < 60:
+#             self.seconds = seconds
+#     def __add__(self,other):
+#         m = self.minutes + other.minutes
+#         s = self.seconds + other.seconds
+#         m += s//60
+#         s =s %60
+#         m = m %60
+#         return MyTime(m,s)
+#
+#     def __str__(self):
+#          return f'<Time: ({self.minutes:02}:{self.seconds:02})>'# str  выведет строку
+#          # чтобы между ними была : нужно место , ее поставить
+#     def __repr__(self):
+#         return f'<Time: ({self.minutes},{self.seconds})>'# report представитель он переводит если несколько аргументов
+#
+#
+# t1 = MyTime(13,15)
+# t2 = MyTime(53,25)
+# print(t1 + t2)
+# Метод __call__ экземпляр класса становится вызываемым как функция
+# Позволяет экземплярам пользовательских типов представляться объектами, поддерживающими вызов. self : Ссылка на экземпляр
+# y = ax^2 + bx + c
+# class SquareFunction:
+#     def __init__(self,a,b,c):
+#         self.a = a
+#         self.b = b
+#         self.c = c
+#     def __call__(self, x):
+#         return self.a* x **2 + self.b * x + self.c
+#
+# s = SquareFunction(1,2,3)
+# print(s(2))
 
-    def __str__(self):
-         return f'<Point: ({self.x},{self.y})>'# str  выведет строку
-    def __repr__(self):
-        return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
-p = [Point(),Point() ]
-print(p)#[<Point: (0,0)>, <Point: (0,0)>]
-# str(a)-> a.__str__()
-
-
-
-class Point:
-    def __init__(self,x=0,y=0):
-        self.x = x
-        self.y = y
-
-    def __str__(self):
-         return f'<Point: ({self.x},{self.y})>'# str  выведет строку
-    def __repr__(self):
-        return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
-
-    def __sub__(self, other):
-        return Point(abs(self.x -other.x), abs(self.y - other.y))# (abs)абсолютные значения без разницы что из чего вычитать
-
-p1 = Point(5,7)
-p2 = Point(9,12)
-print(p1-p2)#<Point: (4,5)>
-
-from math import gipo
-
-class Point:
-    def __init__(self,x=0,y=0):
-        self.x = x
-        self.y = y
-
-    def __str__(self):
-         return f'<Point: ({self.x},{self.y})>'# str  выведет строку
-    def __repr__(self):
-        return f'<Point: ({self.x},{self.y})>'# report представитель он переводит если несколько аргументов
-
-    def __add__(self):
-        pass
-    def __sub__(self, other):
-        return Point(abs(self.x -other.x), abs(self.y - other.y))# (abs)абсолютные значения без разницы что из чего вычитать
