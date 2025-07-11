@@ -91,6 +91,9 @@
 # cp info.txt ./docs
 # mv переместить файл
 # mv info.txt./templace/iii.txt
-# print(hello, world)
+# print('hello, world')
 # python main.py
 # C:\Users\LCIMS1\PycharmProjects\firstProject\.venv\Scripts\python.exe
+import sys
+if (len(sys.argv)) >=2:
+    print('Я',sys.argv[0], 'и мой аргумент', sys.argv[1])
