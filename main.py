@@ -98,17 +98,53 @@
 # if (len(sys.argv)) >=2:
 #     print('Я',sys.argv[0], 'и мой аргумент', sys.argv[1])
 
-import sys
-
-print('Я',sys.argv[0], 'и мой аргумент', sys.argv[1])
-
-if len(sys.argv) >=2:
-    match sys.argv[1]:
-        case 'p':
-           print('Привет')
-        case 'g':
-           print('Пока')
-        case _:
-            print('Не понял')
+# import sys
+#
+# print('Я',sys.argv[0], 'и мой аргумент', sys.argv[1])
+#
+# if len(sys.argv) >=2:
+#     match sys.argv[1]:
+#         case 'p':
+#            print('Привет')
+#         case 'g':
+#            print('Пока')
+#         case _:
+#             print('Не понял')
 # это для утилиты скрипт создает нужное количество дирикторий
 # кнопки винд(значек виндоус) +r открывает командную строку далее cmd
+# CRON сервис - скрипт допустим рассылки
+# Переодические задачи
+# pip install  schedule
+# pip freeze > requirements.txt
+
+# import schedule
+# import  datetime
+# i = 1
+#
+# def job():
+#     global i
+#     print(f'Скрипт запустился {i} раз')
+#     i += 1
+#     t = datetime.datetime.now()
+#     print('Время: ', t.strftime('%H:%M:%S'))
+#
+# schedule.every(3).seconds.do(job)
+#
+# while True:
+#     schedule.run_pending() # вывод ниже
+#     # Скрипт
+#     # запустился
+#     # 1
+#     # раз
+#     # Время: 12:24: 54
+#     # Скрипт
+#     # запустился
+#     # 2
+#     # раз
+#     # Время: 12:24: 57
+#     # Скрипт
+#     # запустился
+#     # 3
+#     # раз
+#     # Время: 12:25: 00
+
