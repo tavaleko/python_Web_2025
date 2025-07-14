@@ -17,3 +17,8 @@ color: yellow;
 ul>li {
 color: yellow;
 }
+#alive{
+font-family: 'Arial';
+font-size: 26pt;
+text-align: center;
+}
