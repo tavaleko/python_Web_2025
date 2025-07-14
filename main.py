@@ -12,3 +12,9 @@
 # display: none; чтоб было не видно
 # font-size: 18pt
 # }
+###########################################
+#CSV файлы
+with open('people.csv','r', encoding='utf-8') as f:
+    reader= csv.reader(f, delimeter=';',quotechar='"')
+    for row in reader:
+       print(row)
