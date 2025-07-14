@@ -25,7 +25,7 @@ document.write("</ol>")*/
 const txt = document.getElementById('alive').style.color = 'red';
 
 }*/
-function changeColor() {
+/*function changeColor() {
 const txt = document.getElementById('alive')
 if(txt.style.display ==='none') { // можно попробовать заменить none на block, inline
 txt.style.display = block;
@@ -34,4 +34,4 @@ txt.style.display = block;
  }
 }
 //подключаюсь к элементу dom
-const txt = document.getElementById('alive').onclick = changeColor;
+const txt = document.getElementById('alive').onclick = changeColor;*/
