@@ -136,4 +136,7 @@ d = {
 # вывод в виде строки
 data = json.dumps(d, indent=4)
 print(data)
-
+# https://openweathermap.org/ зарегистрироваться -> API case
+# file -setting-tools-external tools - sql lite studio - Working with DB-
+# в строке program: путь к файлу Program Files\SQLiteStudio\SQLiteStudio.exe - $filename$ - $filedir
+# открываем програму из pycharma наводим на файл SQLiteStudio  правой кнопкой мыши  внизу external tools выбрать нашу программу
