@@ -62,11 +62,52 @@
 # создавать и раскрывать папки zip
 ##############################
 #
-from zipfile import ZipFile
-import os
+# from zipfile import ZipFile
+# import os
+# #  создали zip
+# csv_files = [f for f in os.listdir() if f.endswith('.csv')]
+# with ZipFile('archive.zip', 'w') as myzip:
+#     for file in csv_files:
+#         myzip.write(file)
+#         os.remove(file)
+# files_to_extract = ['people.csv', 'file.csv']# если надо распоковать конкретные файлы
+# with ZipFile('archive.zip', 'r') as zip_obj:
+#     zip_obj.extractall()# распокавать все файлы
+# with ZipFile('archive.zip', 'r') as zip_obj:
+#     print(zip_obj.namelist())# имена
+###########################################
+#JSON -(JAVA SCRIPT OBJECT NOTATION)
+# для чтения метод
+# load() он читает из файла
+# loads() он читает строковое представление
+#############################################
+# //{"pets":["name": "Rex","age": 8,"meals": ["Purina", "Royal Canin"]],["name": "Roex","age": 5,"meals":
+# ["Purnina", "Royal Canin"]]} //если несколько животных */ в файле json не может быть коментариев иначе выдает ошибку!
+# я перенесла из него данные этот формат для json
+#
+# import json
+# with open('dogs.json', 'rt') as d:
+#     data = json.load(d)
+#
+# print(data)
+# for k, v in data.items():
+#     if type(v) == list: # читаем файл как словарь
+#         print(f'{k}:{', '.join(v)}')
+#     else:
+#         print(f'{k}: {v}')
 
-csv_files = [f for f in os.listdir() if f.endswith('.csv')]
-with ZipFile('archive.zip', 'w') as myzip:
-    for file in csv_files:
-        myzip.write(file)
-        os.remove(file)
+import json
+
+with open('dogs.json', 'rt') as d:
+    temp = d.read() # читаем файл как строку
+    data = json.loads(temp)
+
+print(data)
+for k, v in data.items():
+    if type(v) == list:
+        print(f'{k}:{', '.join(v)}')
+    else:
+        print(f'{k}: {v}')
+
+
+
