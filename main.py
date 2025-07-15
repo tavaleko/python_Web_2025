@@ -306,4 +306,5 @@
 # @timeit
 # def test():
 #     time.sleep(0.8)
+test()
 
