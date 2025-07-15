@@ -1,182 +1,243 @@
-# это закладка
-# https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js необходимо для карусели
-#   <link rel="stylesheet" href="css/style.css"> обязательно поставить!!!!
-# .go-top--show {
-# display: block;
-# } точка в начале это обращение к классу
-# .go-top {
-# position: fixed;
-# right: 20px;
-# bottom: 50px;
-# cursor: pointer; курсор навести тбудет реагировать
-# display: none; чтоб было не видно
-# font-size: 18pt
-# }
-###########################################
-# сегодня мы создаем много файлов csv!!!!
-#CSV файлы
-# import csv
-# data = [
-#     ['name','age','city'],
-#     ['Борис','28','Воронеж'],
-#     ['Ирина','32','Тверь'],
-#     ['Владимир', '18', 'СПб'],
-#     ['Светлана', '27', 'Москва'],
-# ]
+# База данных чтение
+# 1. импорт библиотеки sqlite3
+# 2. Подключаемся к бд
+# 3. Назначить "курсор"
+# 4. работаем с бд
+# 5. отключаеся от бд
+
+# import sqlite3
+# подключаемся
+# connection = sqlite3.connect('db/movies.sqlite')
+# назначим курсор
+# cursor = connection.cursor()
+# запрос (помощью курсора)
+# result = cursor.execute(
+#     """
+#     SELECT title,year FROM films
+#     WHERE year Between 2001 and 2005
+#     """
+# )
+# # print(result)#<sqlite3.Cursor object at 0x000001D2816D54C0>
+# # если будет ошибка смотри может где буквы не хватает
+# #
+# # возвращает список кортежей
 #
+# array = result.fetchall()
+# for title, year in array:
+#     print(title, year)
+
+# result = cursor.execute(
+#         """
+#         SELECT title FROM films
+#         WHERE year Between 2001 and 2005
+#         """
+#     )
+    # print(result)#<sqlite3.Cursor object at 0x000001D2816D54C0>
+    # если будет ошибка смотри может где буквы не хватает
+    # print(result.fetchall())#[('Алиса в стране чудес',), ('Железный человек 2',), ('Ноттингем',), ('Утомленные солнцем: Предстояние',)]
+    # возвращает список кортежей
+
+# print(result.fetchall())
+# fetchall --всё
+# fetchone -- один первый
+# fetchmany(N)--- первые N соответствий
+# connection.close()
+# ###############################################
+#  Запись баз данных
+##############################################
+# добавление через sql
+# INSERT INTO
+# users(name, age)
+# VALUES('Bill',21)
+# насколько одновременно
+# INSERT INTO
+# users(name, age)
+# VALUES('TOM',20),
+# ('Tim',41)
+# меняем параметры лучше по id  так как других параметров может быть насколько
+# UPDATE users
+# SET age =22
+# WHERE id = 2
+# удобно по названию фирмы что то нужно поменять сколпом
+
+# удаляем по id
+# DELETE FROM users
+# WHERE id = 3
+# удалили тех кто старше 30
+# DELETE FROM users
+# WHERE age>30
+#########################################
+# добавление через питон
+# 1. импорт библиотеки sqlite3
+# 2. Подключаемся к бд
+# 3. Назначить "курсор"
+# 4. работаем с бд
+# 5. отключаеся от бд
+# подключаемся
+# connection = sqlite3.connect('db/movies.sqlite')
+# # назначим курсор
+# cursor = connection.cursor()
+# # запрос (помощью курсора)
+# result = cursor.execute(
+#     """
+#     INSERT INTO
+#     users(name, age)
+#     VALUES('TOM',20),
+#     ('Tim',41)
+#     """
+# )
+# connection.commit()
+# connection.close()
+# import sqlite3
+# import csv
 # with open('people.csv', 'r', encoding='utf-8') as f:
-#     reader = csv.reader(f, delimiter=',', quotechar='"')
-#     for row in reader:
-#         print(row)
+#     reader = csv.reader(f,delimiter=',')
+#     next(reader) # приём пропустить заголовок(первая запись- строка)
+#     connection = sqlite3.connect('db/movies.sqlite')
+#     cursor = connection.cursor()
+#     for name, age in reader:
+#         # print(name, age)
+#         cursor.execute(
+#             f"""
+#             INSERT INTO
+#             users(name,age)
+#             VALUES ({name},{age})
+#             """
+#         )
+# connection.commit()
 #
-# with open('employee.csv', 'w', newline='', encoding='utf-8') as f:
-#     writer = csv.writer(f)
-#     writer.writerows(data)
-# # если пишет нет интерпритарора его искать в низу в правом углу
+# import sqlite3
+# connection = sqlite3.connect('db/movies.sqlite')
+# cursor = connection.cursor()
 # import csv
+# with open('people.csv', 'r', encoding='utf-8') as f:
+#     reader = csv.reader(f,delimiter=',')
+#     next(reader) # приём пропустить заголовок(первая запись- строка)
 #
-# from urllib3.filepost import writer
+#     for name, age in reader:
+#         # print(name, age)
+#         cursor.execute(
+#             f"""
+#             INSERT INTO
+#             users(name,age)
+#             VALUES(?,?)
+#             """, (name,int(age))
+#         )
+# connection.commit()# сколько раз будем запускать столько раз добавится. добавили из csv в sql
+# #########################################
+# # создадим класс
+# import sqlite3
+# from idlelib.rpc import response_queue
 #
-# with open ('people.csv', 'r', encoding='utf-8') as f:
-#     dict_reader = csv.DictReader(f)
-#     for row in dict_reader:
-#         print(f' {row['name']} живёт в городе {row['city']}.')
 #
-# field_names = ['name','age','city']
+# class Crud:
+#     def __init__(self, db_path):
+#        self._conn =sqlite3.connect(db_path)
+#        self._cur = self._conn.cursor()
 #
-# data = {
-#     'name': 'Борис',
-#     'age': '27',
-#     'city': 'Москва'
+#     def create(self, table_name, name, age):
+#         self._cur.execute(
+#             f"""
+#                INSERT INTO {table_name}(name, age)
+#                 VALUES(?, ?)
+#                 """, (name, int(age))
+#         )
+#         self._conn.commit()
+#
+#     def read(self, table_name):
+#         res = self._cur.execute(
+#             f'SELECT * FROM {table_name}'
+#         ).fetchall()
+#
+#         for num, name, age in res:
+#             print(num, name, age)
+#
+#     def update(self, table_name, id_num, name=None, age=None):
+#         query = f'UPDATE {table_name} SET name="{name}", age={age} WHERE id={id_num}'
+#         # print(query)
+#         self._cur.execute(
+#             query
+#         )
+#         self._conn.commit()
+#
+#     def delete(self, id_num, table_name):
+#         self._cur.execute(
+#             f'DELETE FROM {table_name} WHERE id={id_num}'
+#         )
+#         self._conn.commit()
+#
+# db = Crud('db/movies.sqlite')
+# db.delete(3, 'users')
+# db.create('users', 'Дмитрий', 18)
+# db.update('users', 8, 'Евгений', 19)
+# db.read('users')
+
+# # метод override(переопределяет метод унчтожения объекта)
+# def __del__(self):
+#     self._cur.close()
+#     self._conn.close()
+
+
+# https://www.deepseek.com/ - запрос на семантическое ядро
+#  погода
+
+# import requests
+# from PIL import Image
+# import io
+#
+# API_KEY = 'd301456e6513c2bb8655eb095834a3ac'
+# URL = 'http://api.openweathermap.org/data/2.5/weather'
+# CITY = 'вятские поляны'
+#
+# params = {
+#     'q': CITY,
+#     'appid': API_KEY,
+#     'units': 'metric',
+#     'lang': 'ru'
 # }
-# with open('file.csv', 'w', newline='', encoding='utf-8') as f:
-#     writer = csv.DictWriter(f, fieldnames=field_names)
-#     writer.writerow(data)
-# import csv
 #
-# data = ['name', 25,'town']
-# with open('sample.csv','w', newline='', encoding='utf-8') as f:
-#     writer= csv.writer(f,quoting=csv.QUOTE_NONNUMERIC)# это для того чтобы только сиволы были в кавычках а цифры были int
-#     writer.writerow(data)
-#################################
-# создавать и раскрывать папки zip
-##############################
+# response = requests.get(URL, params=params)
+# result = response.json()
+# # print(result)
 #
-# from zipfile import ZipFile
-# import os
-# #  создали zip
-# csv_files = [f for f in os.listdir() if f.endswith('.csv')]
-# with ZipFile('archive.zip', 'w') as myzip:
-#     for file in csv_files:
-#         myzip.write(file)
-#         os.remove(file)
-# files_to_extract = ['people.csv', 'file.csv']# если надо распоковать конкретные файлы
-# with ZipFile('archive.zip', 'r') as zip_obj:
-#     zip_obj.extractall()# распокавать все файлы
-# with ZipFile('archive.zip', 'r') as zip_obj:
-#     print(zip_obj.namelist())# имена
-###########################################
-#JSON -(JAVA SCRIPT OBJECT NOTATION)
-# для чтения метод
-# load() он читает из файла
-# loads() он читает строковое представление
-#############################################
-# //{"pets":["name": "Rex","age": 8,"meals": ["Purina", "Royal Canin"]],["name": "Roex","age": 5,"meals":
-# ["Purnina", "Royal Canin"]]} //если несколько животных */ в файле json не может быть коментариев иначе выдает ошибку!
-# я перенесла из него данные этот формат для json
-#
-# import json
-# with open('dogs.json', 'rt') as d:
-#     data = json.load(d)
-#
-# print(data)
-# for k, v in data.items():
-#     if type(v) == list: # читаем файл как словарь
-#         print(f'{k}:{', '.join(v)}')
-#     else:
-#         print(f'{k}: {v}')
-#
-# import json
-#
-# with open('dogs.json', 'rt') as d:
-#     temp = d.read() # читаем файл как строку
-#     data = json.loads(temp)
-#
-# print(data)
-# for k, v in data.items():
-#     if type(v) == list:
-#         print(f'{k}:{', '.join(v)}')
-#     else:
-#         print(f'{k}: {v}')
-
-import json
-#
-# with open('dogs_.json', 'rt') as d:
-#     temp = d.read() # читаем файл как строку
-#     data = json.loads(temp)# строковое значение JSON
+# weather = result['weather'][0]['description']
+# temperature = result['main']['temp']
+# humidity = result['main']['humidity']
+# wind = result['wind']['speed']
+# data = result['coord']
+# ll = f'{data['lon']},{data['lat']}'
+# # print(ll)
 #
 #
-# for i in range(len(data)):
-#     print(f'Питомец №{i+1}')
-#     for k,v in data[i].items():
-#         if type(v) == list:
-#             print(f'{k}:{', '.join(v)}')
+# print(f'Сегодня в городе {CITY}: {weather}')
+# print(f'Температура: {temperature:.1f}\xB0C')
+# print(f'Влажность: {humidity}%')
+# print(f'Скорость ветра: {wind} м/с')
+# link = f'https://static-maps.yandex.ru/1.x/?ll={ll}&spn=0.005,0.005&l=sat&pt={ll},pm2dgl'
+# image = requests.get(link).content
+# if image:
+#     im = Image.open(io.BytesIO(image)).convert('RGB')
+#     im.save('map.jpg')
+# def answer(question):
+#     return 'думайте сами'
+# def dialog():
+#     def answer(question):
+#         if question.lower().startswith('когда'):
+#               return 'Никогда'
 #         else:
-#             print(f'{k}: {v}')
-
-d = {
-    'ананас': 300,
-    'банан': 400,
-    'яблоко': 120,
-    'груша': 280,
-}
-# запись на прямую в файл
-# with open('fruits.json', 'w', encoding='utf-8')as f:
-#    json.dump(d,f, indent=4)
-# вывод в виде строки
-data = json.dumps(d, indent=4)
-print(data)
-# https://openweathermap.org/ зарегистрироваться -> API case
-# file -setting-tools-external tools - sql lite studio - Working with DB-
-# в строке program: путь к файлу Program Files\SQLiteStudio\SQLiteStudio.exe - $filename$ - $filedir
-# открываем програму из pycharma наводим на файл SQLiteStudio  правой кнопкой мыши  внизу external tools выбрать нашу программу
-# #############################################
-# Базовый синтаксис
-# SELECT перчень полей
-# FROM имя_
-# WHERE условия
-# ORDER BY
-
-# # выборка по году выпуска всех параметров
-# SELECT *
-# FROM films
-# WHERE year = 2010
-# # выборка по названию фильма
-# SELECT title
-# FROM films
-# WHERE year = 2010
-
-# SELECT title
-# FROM films
-# WHERE year > 2005
-
-# SELECT title
-# FROM films
-# WHERE year > 2005 AND year <2007
-
-# SELECT title
-# FROM films
-# WHERE year > 2005 AND year <2007 and duration <90 # не чуствителен к регистру
+#               return 'УППС'
+#     question =input()
+#     while question != '':
+#         print(answer(question))
+#         question = input()
 #
-# SELECT title,year
-# FROM films
-# WHERE year > 2005 AND year <2010 and duration <90
+# dialog()
 
-# SELECT title,year
-# FROM films
-# WHERE year > 2005 AND year <2010 and duration <90
-# ORDER BY year # сортировка от меньшего к большему
-
-# SELECT title,year
-# FROM films
-# WHERE year BETWEEN 2005 and 2010 выборка с битвин
+# Декаторы
+def upper_case_print(old_func):
+    def new_func(*args, **kwargs):
+        args_up_case = [str(arg).upper() for arg in args]
+        old_func(*args_up_case, **kwargs)
+    return new_func
+new_print =upper_case_print(print)
+new_print('Привет, Пока')

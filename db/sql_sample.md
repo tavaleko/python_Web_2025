@@ -101,3 +101,23 @@ SELECT year, count(*) as Кол_во
 FROM films
 Group by year HAVING >500
 order by Кол_во desc
+ # добавление через sql
+# INSERT INTO
+# users(name, age)
+# VALUES('Bill',21)
+# насколько одновременно
+# INSERT INTO
+# users(name, age)
+# VALUES('TOM',20),
+# ('Tim',41)
+# меняем параметры лучше по id  так как других параметров может быть насколько
+# UPDATE users
+# SET age =22
+# WHERE id = 2
+# удобно по названию фирмы что то нужно поменять сколпом
+# удаляет таблицу
+drop table users if exists
+
+# добавим новый столбец
+alter table ysers
+add  colums
