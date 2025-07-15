@@ -140,3 +140,43 @@ print(data)
 # file -setting-tools-external tools - sql lite studio - Working with DB-
 # в строке program: путь к файлу Program Files\SQLiteStudio\SQLiteStudio.exe - $filename$ - $filedir
 # открываем програму из pycharma наводим на файл SQLiteStudio  правой кнопкой мыши  внизу external tools выбрать нашу программу
+# #############################################
+# Базовый синтаксис
+# SELECT перчень полей
+# FROM имя_
+# WHERE условия
+# ORDER BY
+
+# # выборка по году выпуска всех параметров
+# SELECT *
+# FROM films
+# WHERE year = 2010
+# # выборка по названию фильма
+# SELECT title
+# FROM films
+# WHERE year = 2010
+
+# SELECT title
+# FROM films
+# WHERE year > 2005
+
+# SELECT title
+# FROM films
+# WHERE year > 2005 AND year <2007
+
+# SELECT title
+# FROM films
+# WHERE year > 2005 AND year <2007 and duration <90 # не чуствителен к регистру
+#
+# SELECT title,year
+# FROM films
+# WHERE year > 2005 AND year <2010 and duration <90
+
+# SELECT title,year
+# FROM films
+# WHERE year > 2005 AND year <2010 and duration <90
+# ORDER BY year # сортировка от меньшего к большему
+
+# SELECT title,year
+# FROM films
+# WHERE year BETWEEN 2005 and 2010 выборка с битвин
