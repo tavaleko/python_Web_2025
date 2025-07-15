@@ -218,6 +218,8 @@
 # if image:
 #     im = Image.open(io.BytesIO(image)).convert('RGB')
 #     im.save('map.jpg')
+#####################################################
+# Декораторы!!!!!!!!!
 # def answer(question):
 #     return 'думайте сами'
 # def dialog():
@@ -234,10 +236,74 @@
 # dialog()
 
 # Декаторы
-def upper_case_print(old_func):
-    def new_func(*args, **kwargs):
-        args_up_case = [str(arg).upper() for arg in args]
-        old_func(*args_up_case, **kwargs)
-    return new_func
-new_print =upper_case_print(print)
-new_print('Привет, Пока')
+# def upper_case_print(old_func):
+#     def new_func(*args, **kwargs):
+#         args_up_case = [str(arg).upper() for arg in args]
+#         old_func(*args_up_case, **kwargs)
+#     return new_func
+# new_print =upper_case_print(print)
+# new_print('Привет, Пока')
+#
+# def upper_case_print(old_func):
+#     def new_func(*args, **kwargs):
+#         case = kwargs.pop('case',None)
+#         if case=='U':
+#             args_up_case = [str(arg).upper() for arg in args]
+#         elif case == 'L':
+#             args_up_case = [str(arg).lower() for arg in args]
+#         return old_func(*args, **kwargs)
+#     return new_func
+# new_print =upper_case_print(print)
+# new_print('Привет, Пока')
+# new_print('Привет, Пока',case='L')
+# new_print('Привет, Пока',case='U')
+
+# def outer():
+#     x = 5
+#
+#
+#     def inner():
+#         nonlocal x
+#         print('Nonlocal x=', x)
+#         x = 10
+#     inner()
+#     print('New x=', x)
+#
+# outer()
+
+# def logger(func):
+#     counter = 0
+#     def decorated_func(*args,**kwargs):
+#         nonlocal counter
+#         counter +=1
+#         print(counter, '->', 'Аргументы: ', args,
+#               'Именованые агрументы: ', kwargs)
+#         result = func(*args, **kwargs)
+#         print('____', 'Результат: ', result)
+#         return result
+#     return decorated_func
+# @logger
+# def make_burger(meal='говядиной',onion=False,tomato=False):
+#     print('Булочка')
+#     if onion:
+#         print('Луковые кольца')
+#     print('Котлета с', meal)
+#     if tomato:
+#         print('Помидоры')
+#     print('Булочка')
+#
+# make_burger(meal='говядина', onion=True)
+
+# import time
+# def timeit(func):
+#     def wrapper(*args, **kwargs):
+#         start = time.time()
+#         result = func(*args,**kwargs)
+#         finish = time.time()
+#         print(f'Функция исполнялась: {finish -start: .4f} cek.')
+#         return result
+#     return wrapper()
+# @timeit
+# def test():
+#     time.sleep(0.8)
+
