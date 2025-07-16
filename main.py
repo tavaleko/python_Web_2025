@@ -4,7 +4,7 @@
 # удалить любую библиотеку pip uninstall  дальше название библиотеки
 # MVC -(Model View Controller)
 from flask import Flask, url_for
-
+import sqlite3
 app = Flask(__name__)
 
 # декоратор @ начинается
@@ -44,6 +44,66 @@ def sample_page():
     </body>
     </html>
 """
+@app.route('/sample-page2')
+def sample_page_2():
+    with open('temp2.html','r', encoding = 'utf-8') as html:
+        return html.read()
+
+#  так делать нельзя
+# x=5
+# @app.route('/1')
+# def show_num():
+#     global x
+#     x += 1
+#     return str(x)
+
+# конвектор <string> по умолчанию строка
+@app.route('/greeting/<user>')
+def greeting(user):
+    return f'Привет! {user}'
+# конвектор <int:number> целое число
+
+@app.route('/greeting/<user>/<int:id_num>')
+def greeting_1(user, id_num):
+    return f'Привет! {user} с id ={id_num}'
+# конвектор <float:number> десятичная дробь
+# конвектор <path:p> может содержать слеши для указания пути
+# конвектор <uuid:id> строка индефикатор (16 байт в HEX- формате) ля оплаты по ссылке
+
+
+@app.route('/greet-user/<int:id_num>')
+def greet_user_1(id_num):
+    con = sqlite3.connect('db/movies.sqlite')
+    cur = con.cursor()
+    query = f'SELECT name FROM users WHERE trip_id={id_num}'
+    response = cur.execute(query)
+    result = response.fetchone()
+    cur.close()
+    con.close()
+    return str(result[0])
+
+@app.route('/get-user/<int:id_num>')
+def get_user(id_num):
+    con = sqlite3.connect('db/movies.sqlite')
+    cur = con.cursor()
+    query = f'SELECT name, city FROM users WHERE trip_id={id_num}'
+    response = cur.execute(query)
+    result = response.fetchone()
+    # print(result)
+    name, city = result
+    cur.close()
+    con.close()
+    return f'''<table border="1">
+    <tr>
+    <td>ФИО</td>
+    <td>Город</td>
+    </tr>
+    <tr>
+    <td>{name}</td>
+    <td>{city}</td>
+    </tr>
+    </table>'''
+
 if __name__ == '__main__':
     app.run(host = 'localhost', port=5000, debug=True) # lockalhost адрес 127.0.0.1
     # debug=True чтобы не было разницы между приложением и браузером
