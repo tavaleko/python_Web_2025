@@ -2,3 +2,14 @@ h1 {
   color: #d22e34;
   text-align: center;
 }
+form.login_form {
+ max-width: 450px;
+ margin-left:auto;
+ margin-right:auto;
+ background-color: pink;
+ padding:10px;
+ border: 5px dotted gray;
+ border-radius: 15
+
+
+}

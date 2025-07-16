@@ -3,7 +3,7 @@
 ############################
 # удалить любую библиотеку pip uninstall  дальше название библиотеки
 # MVC -(Model View Controller)
-from flask import Flask, url_for
+from flask import Flask, url_for, request
 import sqlite3
 app = Flask(__name__)
 
@@ -119,6 +119,20 @@ def get_user_2(id_num=None):
     cur.close()
     con.close()
     return str(result[0])
+
+
+@app.route('/form-test', methods=['POST','GET'])
+def form_test():
+    if request.method =='GET':
+        with open('form-test','r', encoding='utf-8') as html:
+            return  html.read()
+    elif request.method =='POST':
+        # print(request.form ['gender'])
+        # print(request.form['email'])
+        # print(request.form['about'])
+        # print(request.form['accept'])
+        print(request.form)
+        return 'Форма успешно отправлена'
 
 
 if __name__ == '__main__':
