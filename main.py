@@ -82,7 +82,7 @@ def greet_user_1(id_num):
     con.close()
     return str(result[0])
 
-@app.route('/get-user/<int:id_num>')
+@app.route('/get-user-2/<int:id_num>')
 def get_user(id_num):
     con = sqlite3.connect('db/movies.sqlite')
     cur = con.cursor()
@@ -103,6 +103,23 @@ def get_user(id_num):
     <td>{city}</td>
     </tr>
     </table>'''
+
+
+@app.route('/get-user-1')
+@app.route('/get-user-1/<int:id_num>')
+def get_user_2(id_num=None):
+
+    if id_num is None:
+        return 'Нет номера записи'
+    con = sqlite3.connect('db/movies.sqlite')
+    cur = con.cursor()
+    query = f'SELECT name FROM users WHERE trip_id={id_num}'
+    response = cur.execute(query)
+    result = response.fetchone()
+    cur.close()
+    con.close()
+    return str(result[0])
+
 
 if __name__ == '__main__':
     app.run(host = 'localhost', port=5000, debug=True) # lockalhost адрес 127.0.0.1
