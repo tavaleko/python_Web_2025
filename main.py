@@ -1,4 +1,5 @@
 from flask import Flask, url_for, request, render_template
+import os
 from openpyxl.styles.builtins import title
 from werkzeug.utils import  secure_filename
 import sqlite3
@@ -9,7 +10,10 @@ debug= False
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 # шаблонизатор JINJA переменные циклы и тд
+@app.route('/')
 @app.route('/index')
 def index():
     params = {}
@@ -18,6 +22,19 @@ def index():
     params['weather'] = 'Сегодня хорошая погода'
     return render_template('index.html',
                            **params)
+
+
+@app.route('/about')
+def about():
+
+    return render_template('about.html',
+                           title= 'о нас')
+@app.route('/contacts')
+def contact():
+
+    return render_template('contact.html',
+                           title= 'контакты')
+
 
 @app.route('/upload', methods=['POST', 'GET'])
 def file_upload():
