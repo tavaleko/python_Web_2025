@@ -3,8 +3,10 @@ import os
 from openpyxl.styles.builtins import title
 from werkzeug.utils import  secure_filename
 import sqlite3
+form.login
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['SECRET_KEY'] = 'just_secret_key'
 ALLOWED_EXTENSIONS =['txt','pdf','zip','jpg','png']
 debug= False
 def allowed_file(filename):
@@ -35,6 +37,13 @@ def contact():
     return render_template('contact.html',
                            title= 'свяжитесь с нами')
 
+
+@app.route('/login', method=['GET','POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return 'Форма отправлена'
+    return render_template('login.html', title='Авторизация', form=form)
 
 @app.route('/upload', methods=['POST', 'GET'])
 def file_upload():
@@ -94,3 +103,5 @@ if __name__ == '__main__':
     # debug=True чтобы не было разницы между приложением и браузером
 
 # return '<a href="http://localhost:500/get-user
+# pip install flask-wtf
+# pip freeze > requirements.txt
