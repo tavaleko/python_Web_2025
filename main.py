@@ -33,7 +33,7 @@ def about():
 def contact():
 
     return render_template('contact.html',
-                           title= 'контакты')
+                           title= 'свяжитесь с нами')
 
 
 @app.route('/upload', methods=['POST', 'GET'])
