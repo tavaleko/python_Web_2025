@@ -37,19 +37,19 @@ def contact():
                            title= 'свяжитесь с нами')
 
 
-@app.route('/login0', methods=['GET','POST'])
+@app.route('/login', methods=['GET','POST'])
 def login0():
     form = LoginForm()
     if form.validate_on_submit():
         return 'Форма отправлена'
     return render_template('login.html', title='Авторизация', form=form)
 
-@app.route('/login_1', methods=['GET', 'POST'])
+@app.route('/login1', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
         return 'Форма отправлена'
-    return render_template('login_1.html', title='Авторизация', form=form)
+    return render_template('login1.html', title='Авторизация', form=form)
 
 @app.route('/upload', methods=['POST', 'GET'])
 def file_upload():
@@ -111,3 +111,8 @@ if __name__ == '__main__':
 # return '<a href="http://localhost:500/get-user
 # pip install flask-wtf
 # pip freeze > requirements.txt
+# #######################################
+# ORM --object Relational Mapping
+# pip install sqlalchemy
+# pip freeze > requirements.txt
+
