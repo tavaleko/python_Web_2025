@@ -1,9 +1,8 @@
-from flask import Flask, url_for, request, render_template
+from flask import Flask, request, render_template
 import os
-from openpyxl.styles.builtins import title
+from templates.forms.loginform import LoginForm
 from werkzeug.utils import  secure_filename
-import sqlite3
-form.login
+
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['SECRET_KEY'] = 'just_secret_key'
@@ -38,12 +37,19 @@ def contact():
                            title= 'свяжитесь с нами')
 
 
-@app.route('/login', method=['GET','POST'])
-def login():
+@app.route('/login0', methods=['GET','POST'])
+def login0():
     form = LoginForm()
     if form.validate_on_submit():
         return 'Форма отправлена'
     return render_template('login.html', title='Авторизация', form=form)
+
+@app.route('/login_1', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return 'Форма отправлена'
+    return render_template('login_1.html', title='Авторизация', form=form)
 
 @app.route('/upload', methods=['POST', 'GET'])
 def file_upload():
