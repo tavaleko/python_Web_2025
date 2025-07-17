@@ -43,6 +43,7 @@ def file_upload():
 
 @app.route('/numbers')
 def odd_even():
+
     return render_template('numbers.html',
                            title='Чет-нечёт', number=2)
 
@@ -61,6 +62,18 @@ def queue():
     # loop index номер итерации начинается с 1
     return render_template('vars.html', title='Стоим в очереди')
 
+
+@app.route('/numbers/')
+@app.route('/numbers/<int:num>')
+def odd_even_num(num=None):
+    if num is None:
+        return render_template('numbers.html',
+                               title='Нет числа', number='')
+    return render_template('numbers.html',
+                           title='Чет-нечёт', number=num)
+
 if __name__ == '__main__':
     app.run(host = 'localhost', port=5000, debug=debug) # lockalhost адрес 127.0.0.1
     # debug=True чтобы не было разницы между приложением и браузером
+
+# return '<a href="http://localhost:500/get-user

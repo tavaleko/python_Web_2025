@@ -5,10 +5,14 @@
     <title>{{title}}</title>
 </head>
 <body>
-{% if number %2 == 0 %}
-<p>Число {{number}}чётное!</p>
-{% slse %}
-<p>Число {{number}}нечётное!</p>
+{% if number %}
+    {% if number %2 == 0 %}
+        <p>Число {{number}} чётное!</p>
+    {% slse %}
+        <p>Число {{number}} нечётное!</p>
+    {% endif %}
+{% else%}
+    <p>{ 'Числа {{number}} нет'}</p>
 {% endif %}
 </body>
 </html>
