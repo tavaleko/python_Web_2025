@@ -22,3 +22,11 @@ class User(SqlAlchemyBase):
     create_data = sqlalchemy.Column(sqlalchemy.DateTime,
                                     default=datetime.datetime.now())
     news = orm.relationship("News",back_populates='user')
+
+
+    def set_username(self, newname):
+        self.name = newname
+
+    def __repr__(self):
+        return f'<User {self.name}>'
+

@@ -22,3 +22,6 @@ class News(SqlAlchemyBase):
                                         sqlalchemy.ForeignKey("users.id"))
 
     news = orm.relationship('User')
+
+    def __repr__(self):
+        return f'<News: {self.title}>'
