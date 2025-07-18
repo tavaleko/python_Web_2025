@@ -21,4 +21,4 @@ class User(SqlAlchemyBase):
                                         nullable=True)
     create_data = sqlalchemy.Column(sqlalchemy.DateTime,
                                     default=datetime.datetime.now())
-    news = orm.relationship("News",back_popullates='user')
+    news = orm.relationship("News",back_populates='user')

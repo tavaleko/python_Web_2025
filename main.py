@@ -17,6 +17,7 @@ from werkzeug.utils import secure_filename
 
 # from forms.loginform import LoginForm
 from data import db_session
+from data.users import User
 import sqlite3
 
 app = Flask(__name__)
@@ -218,3 +219,11 @@ def queue():
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
     app.run(host='127.0.0.1', port=5000, debug=debug)
+
+    user= User()
+    user.name ='User1'
+    user.about ='Данные про User1'
+    user.email ='a@aa.ru'
+    db_sess = db_session.create_session()
+    db_sess.add(user)
+    db_sess.comit()
