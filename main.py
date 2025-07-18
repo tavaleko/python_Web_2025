@@ -8,18 +8,21 @@
 # JINJA - переменные, условия, циклы и т.д.
 # ORM - Object Relational Mapping
 import os.path
+# from crypt import methods
 from sqlite3 import Error
 
 
-from flask import Flask, url_for, request, render_template
+from flask import Flask, url_for, request, render_template, redirect
 from openpyxl.styles.builtins import title
 from werkzeug.utils import secure_filename
 
-# from forms.loginform import LoginForm
+from forms.loginform import LoginForm
 from data import db_session
 from data.users import User
 from data.news import News
 import sqlite3
+
+from forms.user import Register
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
@@ -34,8 +37,8 @@ def allowed_file(filename):
 
 
 @app.errorhandler(404)
-def not_found():
-    return  render_template('404.html', title="Не найдено")
+def not_found(e):
+    return render_template('404.html', title='Не найдено')
 
 @app.route('/')
 @app.route('/index')
@@ -60,6 +63,39 @@ def contacts():
                            title='Свяжитесь с нами')
 
 
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    form = Register()
+    if form.validate_on_submit():  # тоже самое, что и request.method == 'POST'
+        # если пароли не совпали
+        if form.password.data != form.password_again.data:
+            return render_template('register.html',
+                                   title='Регистрация',
+                                   message='Пароли не совпадают',
+                                   form=form)
+
+        db_sess = db_session.create_session()
+
+        # Если пользователь с таким E-mail в базе уже есть
+        if db_sess.query(User).filter(User.email == form.email.data).first():
+            return render_template('register.html',
+                                   title='Регистрация',
+                                   message='Такой пользователь уже есть',
+                                   form=form)
+        user = User(
+            name=form.name.data,
+            email=form.email.data,
+            about=form.about.data
+        )
+        user.set_password(form.password.data)
+        db_sess.add(user)
+        db_sess.commit()
+        return redirect('/login')
+    return render_template('register.html',
+                           title='Регистрация', form=form)
+
+
 # @app.route('/login', methods=['GET', 'POST'])
 # def login():
 #     form = LoginForm()
@@ -67,6 +103,12 @@ def contacts():
 #         return 'Форма отправлена'
 #     return render_template('login.html', title='Авторизация', form=form)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        return 'Форма отправлена'
+    return render_template('login.html', title='Авторизация', form=form)
 
 @app.route('/countdown')
 def cd():
@@ -216,19 +258,27 @@ def queue():
     # loop.last - True, если последняя итерация
     return render_template('vars.html', title='Стоим в очереди')
 
+# вывод всех публичных новостей(is_private == False)
+@app.route('/news')
+def news():
+    db_sess = db_session.create_session()
+    all_news = db_sess.query(News).filter(News.is_private != True).all()
+    # print(all_news)
+    return render_template('news.html',
+                           title='Новости', news=all_news)
 
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
     app.run(host='127.0.0.1', port=5000, debug=debug)
-#
-# user= User()
-# user.name ='Bill'
-# user.about ='Данные про User2'
-# user.email ='a@aa.ru'
-# db_sess = db_session.create_session()
-# db_sess.add(user)
-# db_sess.comit()
-# # user.delete()
+
+
+    # user.name = 'User2'
+    # user.about = 'Данные про User2'
+    # user.email = 'b@c.ru'
+    # db_sess = db_session.create_session()
+    # db_sess.add(user)
+    # db_sess.commit()
+# user.delete()
 # user.set_username('Jhon')
 # db_sess.commit()
 # print(user)
