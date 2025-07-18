@@ -10,9 +10,12 @@
 import os.path
 from sqlite3 import Error
 
-from forms.loginform import LoginForm
+
 from flask import Flask, url_for, request, render_template
+from openpyxl.styles.builtins import title
 from werkzeug.utils import secure_filename
+
+# from forms.loginform import LoginForm
 from data import db_session
 import sqlite3
 
@@ -27,6 +30,10 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+@app.errorhandler(404)
+def not_found():
+    return  render_template('404.html', title="Не найдено")
 
 @app.route('/')
 @app.route('/index')
@@ -51,12 +58,12 @@ def contacts():
                            title='Свяжитесь с нами')
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        return 'Форма отправлена'
-    return render_template('login.html', title='Авторизация', form=form)
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     form = LoginForm()
+#     if form.validate_on_submit():
+#         return 'Форма отправлена'
+#     return render_template('login.html', title='Авторизация', form=form)
 
 
 @app.route('/countdown')
