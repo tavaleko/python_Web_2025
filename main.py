@@ -1,19 +1,33 @@
-from flask import Flask, request, render_template
-import os
-from templates.forms.loginform import LoginForm
-from werkzeug.utils import  secure_filename
+# Введение во Flask
+# MVC-(Model View Controller)
+# GET - запрашивает данные (read)
+# POST - отправляет данные на сервер (submit)
+# PUT - заменяет всё на сервере из контекста запроса ("заменить")
+# DELETE - удаляет указанные данные ("удалить")
+# PATCH - частичное изменение данных
+# JINJA - переменные, условия, циклы и т.д.
+# ORM - Object Relational Mapping
+import os.path
+from sqlite3 import Error
+
+from forms.loginform import LoginForm
+from flask import Flask, url_for, request, render_template
+from werkzeug.utils import secure_filename
+from data import db_session
+import sqlite3
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['SECRET_KEY'] = 'just_secret_key'
-ALLOWED_EXTENSIONS =['txt','pdf','zip','jpg','png']
-debug= False
+ALLOWED_EXTENSIONS = ['txt', 'pdf', 'zip', 'jpg', 'png']
+debug = False
+
+
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# шаблонизатор JINJA переменные циклы и тд
 @app.route('/')
 @app.route('/index')
 def index():
@@ -27,29 +41,124 @@ def index():
 
 @app.route('/about')
 def about():
-
     return render_template('about.html',
-                           title= 'о нас')
+                           title='Про нас')
+
+
 @app.route('/contacts')
-def contact():
+def contacts():
+    return render_template('contacts.html',
+                           title='Свяжитесь с нами')
 
-    return render_template('contact.html',
-                           title= 'свяжитесь с нами')
 
-
-@app.route('/login', methods=['GET','POST'])
-def login0():
+@app.route('/login', methods=['GET', 'POST'])
+def login():
     form = LoginForm()
     if form.validate_on_submit():
         return 'Форма отправлена'
     return render_template('login.html', title='Авторизация', form=form)
 
-@app.route('/login1', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        return 'Форма отправлена'
-    return render_template('login1.html', title='Авторизация', form=form)
+
+@app.route('/countdown')
+def cd():
+    lst = [str(x) for x in reversed(range(10))]
+    lst.append('Полетели!!!')
+    return '<br>'.join(lst)
+
+
+@app.route('/image')
+def show_image():
+    return f'<img src="{url_for('static', filename='images/python.jpg')}">'
+
+
+@app.route('/sample-page')
+def sample_page():
+    return f"""<!DOCTYPE html>
+            <html lang="ru">
+            <head>
+                <meta charset="UTF-8">
+                <title>Картинка Питона</title>
+            </head>
+            <body>
+                <img src="{url_for('static', filename='images/python.jpg')}" alt="Python">
+            </body>
+            </html>
+    """
+
+
+@app.route('/sample-page2')
+def sample_page2():
+    with open('temp.html', 'r', encoding='utf-8') as html:
+        return html.read()
+
+
+# Так делать мы не будем
+# x = 5
+# @app.route('/1')
+# def show_num():
+#     global x
+#     x += 1
+#     return str(x)
+
+# <string> - по умолчанию строка
+# <int:number> - целое
+# <float:number> - дес. дробь
+# <path:p> - может содержать слэши для указания пути
+# <uuid:id> - строка-идентификатор (16-байт в HEX-формате)
+@app.route('/greeting/<string:user>/<int:id_num>')
+def greeting(user, id_num):
+    return f'Привет, {user} c id={id_num}'
+
+
+@app.route('/get-user/')
+@app.route('/get-user/<int:id_num>')
+def get_user(id_num=None):
+    try:
+        # Подключение к базе данных
+        con = sqlite3.connect('db/movies.sqlite')
+        cur = con.cursor()
+
+        if id_num is None:
+            # Получение списка всех пользователей
+            query = 'SELECT trip_id, name FROM users'
+            response = cur.execute(query)
+            result = response.fetchall()
+            return render_template('get_user.html', users=result)
+
+        # Получение информации о конкретном пользователе
+        query = 'SELECT name, city, date_first FROM users WHERE trip_id=?'
+        response = cur.execute(query, (id_num,))
+        result = response.fetchone()
+
+        if result:
+            name, city, date_first = result
+            return render_template('get_user.html',
+                                   name=name,
+                                   city=city,
+                                   start=date_first)
+        else:
+            return "Пользователь не найден", 404
+
+    except Error as e:
+        return f"Произошла ошибка: {str(e)}", 500
+
+    finally:
+        # Гарантированное закрытие соединения
+        if con:
+            cur.close()
+            con.close()
+
+
+
+@app.route('/form-test', methods=['POST', 'GET'])
+def form_test():
+    if request.method == 'GET':
+        with open('form.html', 'r', encoding='utf-8') as html:
+            return html.read()
+    elif request.method == 'POST':
+        print(request.form)
+        return 'Форма успешно отправлена'
+
 
 @app.route('/upload', methods=['POST', 'GET'])
 def file_upload():
@@ -73,11 +182,14 @@ def file_upload():
     return "Ошибка загрузки"
 
 
-@app.route('/numbers')
-def odd_even():
-
+@app.route('/numbers/')
+@app.route('/numbers/<int:num>')
+def odd_even(num=None):
+    if num is None:
+        return render_template('numbers.html',
+                               title='Нет числа', number='')
     return render_template('numbers.html',
-                           title='Чет-нечёт', number=2)
+                           title='Чет-нечёт', number=num)
 
 
 @app.route('/deals')
@@ -86,33 +198,16 @@ def printlist():
             'Снять показания счётчика', 'Сходить в магазин']
     return render_template('printlist.html', deals=deal)
 
+
 @app.route('/queue')
 def queue():
-    # loop index 0 номер итерации начинается с 0
-    # loop first True  если этерация первая
-    # loop last True если итерация последняя
-    # loop index номер итерации начинается с 1
+    # loop.index - номер итерации, начиная с 1
+    # loop.index0 - номер итерации, начиная с 0
+    # loop.first - True, если первая итерация
+    # loop.last - True, если последняя итерация
     return render_template('vars.html', title='Стоим в очереди')
 
 
-@app.route('/numbers/')
-@app.route('/numbers/<int:num>')
-def odd_even_num(num=None):
-    if num is None:
-        return render_template('numbers.html',
-                               title='Нет числа', number='')
-    return render_template('numbers.html',
-                           title='Чет-нечёт', number=num)
-
 if __name__ == '__main__':
-    app.run(host = 'localhost', port=5000, debug=debug) # lockalhost адрес 127.0.0.1
-    # debug=True чтобы не было разницы между приложением и браузером
-
-# return '<a href="http://localhost:500/get-user
-# pip install flask-wtf
-# pip freeze > requirements.txt
-# #######################################
-# ORM --object Relational Mapping
-# pip install sqlalchemy
-# pip freeze > requirements.txt
-
+    db_session.global_init('db/news.sqlite')
+    app.run(host='127.0.0.1', port=5000, debug=debug)
