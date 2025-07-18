@@ -14,8 +14,9 @@ from sqlite3 import Error
 
 from flask import Flask, url_for, request, render_template, redirect
 from openpyxl.styles.builtins import title
+from pyexpat.errors import messages
 from werkzeug.utils import secure_filename
-
+from flask_login import LoginManager, login_user,logout_user
 from forms.loginform import LoginForm
 from data import db_session
 from data.users import User
@@ -25,6 +26,11 @@ import sqlite3
 from forms.user import Register
 
 app = Flask(__name__)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['SECRET_KEY'] = 'just_secret_key'
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'zip', 'jpg', 'png']
@@ -35,6 +41,10 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@login_manager.user_loader
+def load_user(user_id):
+    db_sess = db_session.create_session()
+    return db_sess.query(User).get(user_id)
 
 @app.errorhandler(404)
 def not_found(e):
@@ -59,9 +69,25 @@ def about():
 
 @app.route('/contacts')
 def contacts():
-    return render_template('contacts.html',
+    return render_template('contact.html',
                            title='Свяжитесь с нами')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user, remember= form.remember_me.data)
+            return redirect('/')
+        return render_template('login.html', message= 'Неверный логин или пароль', title='Ошибка авторизации',form=form)
+    return render_template('login.html', title='Авторизация', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -103,12 +129,7 @@ def register():
 #         return 'Форма отправлена'
 #     return render_template('login.html', title='Авторизация', form=form)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        return 'Форма отправлена'
-    return render_template('login.html', title='Авторизация', form=form)
+
 
 @app.route('/countdown')
 def cd():
