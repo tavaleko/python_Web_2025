@@ -4,22 +4,21 @@ from .db_session import SqlAlchemyBase
 from sqlalchemy import orm
 
 
-class User(SqlAlchemyBase):
-    __tablename__ = 'users'
+class News(SqlAlchemyBase):
+    __tablename__ = 'news'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True,
                            autoincrement=True)
-    name = sqlalchemy.Column(sqlalchemy.String,
+    title = sqlalchemy.Column(sqlalchemy.String,
                              nullable=True)
-    about = sqlalchemy.Column(sqlalchemy.String,
+    content = sqlalchemy.Column(sqlalchemy.String,
                               nullable=True)
-    email = sqlalchemy.Column(sqlalchemy.String,
-                              index=True, unique=True,
-                              nullable=True)
-    hashed_password = sqlalchemy.Column(sqlalchemy.String,
-                                        nullable=True)
-    create_data = sqlalchemy.Column(sqlalchemy.DateTime,
+    create_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                     default=datetime.datetime.now())
+    is_private = sqlalchemy.Column(sqlalchemy.Boolean,
+                              default=True)
+    user_id = sqlalchemy.Column(sqlalchemy.Integer,
+                                        sqlalchemy.ForeignKey("users.id"))
 
-    news = orm.relationship("News", back_populates='user')
+    news = orm.relationship('User')
