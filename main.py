@@ -420,5 +420,5 @@ if __name__ == '__main__':
 # post /book добавить книгу
 # delite /book/7 удалить конкретную книгу
 ###############################################
-# pip install sqlalchemy serializer
+# pip install sqlalchemy_serializer
 # pip freeze > requirements.txt
