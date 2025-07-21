@@ -382,66 +382,30 @@ if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
     app.run(host='127.0.0.1', port=5000, debug=debug)
 
-
+    # db_sess = db_session.create_session()
+    # user = db_sess.query(User).filter(User.id == 1).first()
+    # for news in user.news:
+    #     print(news)
+    # print(user.id)
+    # news = News(title='Third News', content='Third Content',
+    #              is_private=False)
+    # user.news.append(news)
+    # # db_sess.add(news)
+    # db_sess.commit()
+    # user = User()
+    # db_sess = db_session.create_session()
+    # user = db_sess.query(User).filter(User.id == 1).first()
+    # print(user)
+    # db_sess.delete(user)
+    # # user.set_username('John')
+    # db_sess.commit()
     # user.name = 'User2'
     # user.about = 'Данные про User2'
     # user.email = 'b@c.ru'
     # db_sess = db_session.create_session()
     # db_sess.add(user)
     # db_sess.commit()
-# user.delete()
-# user.set_username('Jhon')
-# db_sess.commit()
-# print(user)
-#
-#
-#
-# #     user = User()
-# #     db_sess = db_sess.session.create_session()
-# #     db_sess = db_sess.query(User).first()
-# #     print(first)
-# #     user = User()
-# #     db_sess = db_sess.session.create_session()
-# #     db_sess = db_sess.query(User).all()
-# #     print(user)
-# #     user = User()
-# #     db_sess = db_sess.session.create_session()
-# #     db_sess = db_sess.query(User).filter(User.id > 1).all()
-# #
-# #     user = User()
-# #     db_sess = db_sess.session.create_session()
-# #     db_sess = db_sess.query(User).filter(User.name.not_like('%1%')).all()
-# #
-# # user = User()
-# # db_sess = db_sess.session.create_session()
-# # db_sess = db_sess.query(User).filter(User.id != 1 and User.email.not_like('%a%')).all()
-# #
-# user = User()
-# db_sess = db_sess.session.create_session()
-# # db_sess = db_sess.query(User).filter((User.id != 1) | (User.email.not_like('%a%'))).all()# | это аргумент или
-# db_sess = db_session.create_session()
-# user = db_sess.query(User).filter(User.id ==1).first()
-# print(user.id)
-# news = News(title='First New', content='News Content', user_id=1, is_private=False)
-# db_sess.add(news)
-#
-# news = News(title='First New', content='News Content', user_id=1, is_private=False)
-# user.append.comit()
-#
-# db_sess.comit()
-# for news in user.news:
-#     print(news)
-#
-#     db_sess = db_session.create_session()
-#     user = db_sess.query(User).filter(User.id == 1).first()
-#     for news in user.news:
-#         print(news)
-#     print(user.id)
-#     news = News(title='Third News', content='Third Content',
-#                  is_private=False)
-#     user.news.append(news)
-#     # db_sess.add(news)
-#     db_sess.commit()
 
 # ###############################
 # https://chat.qwen.ai/
+
