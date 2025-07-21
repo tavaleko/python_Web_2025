@@ -16,7 +16,7 @@ from flask import Flask, url_for, request, render_template, redirect
 from openpyxl.styles.builtins import title
 from pyexpat.errors import messages
 from werkzeug.utils import secure_filename
-from flask_login import LoginManager, login_user,logout_user
+from flask_login import LoginManager, login_user,logout_user, current_user, login_required
 from forms.loginform import LoginForm
 from data import db_session
 from data.users import User
@@ -49,6 +49,11 @@ def load_user(user_id):
 @app.errorhandler(404)
 def not_found(e):
     return render_template('404.html', title='Не найдено')
+
+
+@app.errorhandler(401)
+def not_authorized(_):
+    return redirect('/login')
 
 @app.route('/')
 @app.route('/index')
@@ -85,6 +90,7 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect('/')
@@ -129,7 +135,16 @@ def register():
 #         return 'Форма отправлена'
 #     return render_template('login.html', title='Авторизация', form=form)
 
-
+@app.route('/news')
+def news():
+    db_sess = db_session.create_session()
+    if current_user.is_authenticated:
+        all_news = db_sess.query(News).filter(News.user == current_user) | (News.is_private !=True).all_()
+    else:
+        all_news = db_sess.query(News).filter(News.is_private != True).all()
+    # print(all_news)
+    return render_template('news.html',
+                           title='Новости', news=all_news)
 
 @app.route('/countdown')
 def cd():
@@ -280,13 +295,15 @@ def queue():
     return render_template('vars.html', title='Стоим в очереди')
 
 # вывод всех публичных новостей(is_private == False)
-@app.route('/news')
-def news():
-    db_sess = db_session.create_session()
-    all_news = db_sess.query(News).filter(News.is_private != True).all()
-    # print(all_news)
-    return render_template('news.html',
-                           title='Новости', news=all_news)
+# @app.route('/news')
+# def news():
+#     db_sess = db_session.create_session()
+#     all_news = db_sess.query(News).filter(News.is_private != True).all()
+#     # print(all_news)
+#     return render_template('news.html',
+#                            title='Новости', news=all_news)
+# Вывод всех публичных новостей (is_private == False)
+
 
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
