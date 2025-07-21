@@ -1,13 +1,23 @@
 import flask
+from flask import jsonify
 
-from . import db_session # когда точка пробел это в этой директории
-from .news import News # когда точка без пробела это другая директория
+from . import db_session # точка с пропуском это другая дириктория
+from .news import News # эта деректория по этому пропуска нет
 blueprint = flask.Blueprint(
     'news_api',
     __name__,
     template_folder='templates'
 )
 
+
 @blueprint.route('/api/news')
 def get_news():
-    return 'API news_api работает'
+    db_sess = db_session.create_session()
+    news = db_sess.query(News).all()
+    return jsonify(
+        {
+            'news': [
+                item.to_dict(only=('title', 'content', 'user.name'))
+                for item in news]
+        }
+    )
