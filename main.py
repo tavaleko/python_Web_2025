@@ -8,6 +8,7 @@
 # JINJA - переменные, условия, циклы и т.д.
 # ORM - Object Relational Mapping
 import os.path
+from os import abort
 # from crypt import methods
 from sqlite3 import Error
 
@@ -21,6 +22,7 @@ from forms.loginform import LoginForm
 from data import db_session
 from data.users import User
 from data.news import News
+from forms.news import NewsForm
 import sqlite3
 
 from forms.user import Register
@@ -135,16 +137,87 @@ def register():
 #         return 'Форма отправлена'
 #     return render_template('login.html', title='Авторизация', form=form)
 
+# Вывод всех публичных новостей (is_private == False)
 @app.route('/news')
 def news():
     db_sess = db_session.create_session()
     if current_user.is_authenticated:
-        all_news = db_sess.query(News).filter(News.user == current_user) | (News.is_private !=True).all_()
+        all_news = db_sess.query(News).filter(
+            (News.user == current_user) | (News.is_private != True)).all()
     else:
         all_news = db_sess.query(News).filter(News.is_private != True).all()
     # print(all_news)
     return render_template('news.html',
                            title='Новости', news=all_news)
+
+
+@app.route('/newsjob', methods=['GET', 'POST'])
+@login_required
+def add_news():
+    form = NewsForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        news = News()
+        news.title = form.title.data
+        news.content = form.content.data
+        news.is_private = form.is_private.data
+        current_user.news.append(news)
+        db_sess.merge(current_user)
+        db_sess.commit()
+        return redirect('/news')
+    return render_template('newsjob.html',
+                           title='Добавление новости',
+                           form=form)
+
+
+@app.route('/newsjob/<int:id_num>', methods=['GET', 'POST'])
+@login_required
+def edit_news(id_num):
+    form = NewsForm()
+    if request.method == 'GET':
+        db_sess = db_session.create_session()
+        news = db_sess.query(News).filter(
+            News.id == id_num, News.user == current_user
+        ).first()
+        if news:
+            form.title.data = news.title
+            form.content.data = news.content
+            form.is_private.data = news.is_private
+        else:
+            abort(404)
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        news = db_sess.query(News).filter(
+            News.id == id_num, News.user == current_user
+        ).first()
+        if news:
+            news.title = form.title.data
+            news.content = form.content.data
+            news.is_private = form.is_private.data
+            db_sess.commit()
+            return redirect('/news')
+        else:
+            abort(404)
+    return render_template('newsjob.html',
+                           title='Редактирование новости',
+                           form=form)
+
+
+@app.route('/newsdel/<int:news_id>')
+@login_required
+def news_delete(news_id):
+    db_sess = db_session.create_session()
+    news = db_sess.query(News).filter(
+        News.id == news_id, News.user == current_user
+    ).first()
+
+    if news:
+        db_sess.delete(news)
+        db_sess.commit()
+    else:
+        abort(404)
+    return redirect('/news')
+
 
 @app.route('/countdown')
 def cd():
