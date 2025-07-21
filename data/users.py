@@ -1,13 +1,14 @@
 import datetime
 import sqlalchemy
 from flask_login import UserMixin
+from sqlalchemy_serializer import SerializerMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from .db_session import SqlAlchemyBase
 from sqlalchemy import orm
 
 
-class User(SqlAlchemyBase, UserMixin):
+class User(SqlAlchemyBase, UserMixin, SerializerMixin):
     __tablename__ = 'users'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
@@ -22,9 +23,7 @@ class User(SqlAlchemyBase, UserMixin):
                               nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String,
                                         nullable=True)
-
-    level = sqlalchemy.Column(sqlalchemy.Integer, default= 1)
-
+    level = sqlalchemy.Column(sqlalchemy.Integer, default=1)
     create_data = sqlalchemy.Column(sqlalchemy.DateTime,
                                     default=datetime.datetime.now())
 
@@ -43,4 +42,4 @@ class User(SqlAlchemyBase, UserMixin):
         return check_password_hash(self.hashed_password, password)
 
     def is_admin(self):
-        return  self.level > 1
+        return self.level > 1
