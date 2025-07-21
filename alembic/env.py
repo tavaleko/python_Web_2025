@@ -1,9 +1,8 @@
-from logging.config import fileConfig
-
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
-from alembic import context
+import sys
+sys.path.insert(0, 'Путь к папке проекта')
+from data.db_session import SqlAlchemyBase
+import data.__all_models
+target_metadata = SqlAlchemyBase.metadata
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
