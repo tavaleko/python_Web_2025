@@ -13,6 +13,7 @@ import sqlite3
 from sqlite3 import Error
 
 from flask import Flask, url_for, request, render_template, redirect, abort
+from openpyxl.styles.builtins import title
 from werkzeug.utils import secure_filename
 
 from data import db_session
@@ -67,6 +68,7 @@ def index():
 
 
 @app.route('/about')
+@login_required
 def about():
     return render_template('about.html',
                            title='Про нас')
@@ -346,6 +348,7 @@ def edit_news(id_num):
                            title='Редактирование новости',
                            form=form)
 
+
 @app.route('/newsdel/<int:news_id>')
 @login_required
 def news_delete(news_id):
@@ -362,10 +365,22 @@ def news_delete(news_id):
     return redirect('/news')
 
 
+@app.route('/adminpage', methods=['GET', 'POST'])
+@login_required
+def adminpanel():
+    if current_user.is_authenticated and current_user.is_admin():
+        db_sess = db_session.create_session()
+        res = db_sess.query(News).all()
+        return render_template('admin.html',
+                               title='Панель администратора',
+                               news=res)
+    else:
+        abort(404)
+
+
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
     app.run(host='127.0.0.1', port=5000, debug=debug)
-
 
 
     # user.name = 'User2'
@@ -401,9 +416,9 @@ if __name__ == '__main__':
 # # db_sess = db_sess.session.create_session()
 # # db_sess = db_sess.query(User).filter(User.id != 1 and User.email.not_like('%a%')).all()
 # #
-# # user = User()
-# # db_sess = db_sess.session.create_session()
-# # # db_sess = db_sess.query(User).filter((User.id != 1) | (User.email.not_like('%a%'))).all()# | это аргумент или
+# user = User()
+# db_sess = db_sess.session.create_session()
+# # db_sess = db_sess.query(User).filter((User.id != 1) | (User.email.not_like('%a%'))).all()# | это аргумент или
 # db_sess = db_session.create_session()
 # user = db_sess.query(User).filter(User.id ==1).first()
 # print(user.id)
@@ -416,7 +431,17 @@ if __name__ == '__main__':
 # db_sess.comit()
 # for news in user.news:
 #     print(news)
-
+#
+#     db_sess = db_session.create_session()
+#     user = db_sess.query(User).filter(User.id == 1).first()
+#     for news in user.news:
+#         print(news)
+#     print(user.id)
+#     news = News(title='Third News', content='Third Content',
+#                  is_private=False)
+#     user.news.append(news)
+#     # db_sess.add(news)
+#     db_sess.commit()
 
 # ###############################
 # https://chat.qwen.ai/

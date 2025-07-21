@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 <h1>Новости</h1>
 {% if current_user.is_authenticated %}
@@ -16,7 +17,7 @@
     </div>
 </div>
 {% if current_user.is_authenticated and current_user == item.user %}
-<div>
+<div class="py-1">
     <a href="/newsjob/{{item.id}}" class="btn btn-warning btn-sm">
     Изменить новость
 </a>
