@@ -1,6 +1,7 @@
 import os.path
 import sqlite3
 from sqlite3 import Error
+import send_mail
 
 import requests
 from flask import Flask, url_for, request, render_template, redirect, abort, make_response, jsonify
@@ -13,6 +14,7 @@ from forms.loginform import LoginForm
 from forms.news import NewsForm
 from forms.user import Register
 from flask_login import LoginManager, login_user, logout_user, current_user, login_required
+
 
 app = Flask(__name__)
 
@@ -383,6 +385,20 @@ def testapi():
                            title='Тест API',
                            news=res)
 
+@app.route('/sendmail', methods=['GET', 'POST'])
+def mail_send():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    message = request.form.get('message')
+    temp = (f'Письмо с обратной связью от '
+            f'{name} c текстом {message}. '
+            f'Отправитель: {email}. Вот его сообщение: ')
+    mess = temp + message
+    send_mail('Ваш email', 'обратная связь с сайта', mess)
+    send_mail(email, 'Получено', f'{name},  спасибо за обратную связь.')
+    return render_template('contacts.html',
+                           title='Почта отправлена', mess='Форма отправлена')
+
 
 if __name__ == '__main__':
     db_session.global_init('db/news.sqlite')
@@ -413,4 +429,8 @@ if __name__ == '__main__':
     # db_sess.add(user)
     # db_sess.commit()# pip freeze > requirements.txt
 
+###########################################
+
 # pip install python-dotenv
+###################################
+# Code-
