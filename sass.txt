@@ -16,4 +16,3 @@
 "last 10 versions"
 ],
 "liveSassCompile.settings.showOutputWindowOn": "Information",
-a
