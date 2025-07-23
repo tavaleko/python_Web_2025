@@ -1,6 +1,9 @@
 import os.path
 import sqlite3
 from sqlite3 import Error
+
+from pyexpat.errors import messages
+
 import send_mail
 
 import requests
@@ -400,6 +403,12 @@ def mail_send():
     send_mail(email, 'Получено', f'{name},  спасибо за обратную связь.')
     return render_template('contacts.html',
                            title='Почта отправлена', mess='Форма отправлена')
+
+# def send_to_telebot():
+#     bot_token = 'Ваш_токен'
+#     chat_id = 'Ваш_Chat_ID'# 2075547505
+#     message = 'Ваше сообщение'
+#     requests.get(f'https://api.telegram.org/bot{bot_token}/sendMessage?chat_id={chat_id}&text={message}') # надо доделать
 
 
 if __name__ == '__main__':
