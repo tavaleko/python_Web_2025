@@ -16,7 +16,7 @@ import time
 #     print('завершаем')
 #
 # asyncio.run(func2())
-
+# co-routine(корутина)
 async def say_hello():
     await asyncio.sleep(1)
     print('Привет')
