@@ -62,4 +62,4 @@ def callback_inline(call):
         bot.send_message(call.message.chat.id, 'Не переживай, всё наладится!!!')
 
 
-bot.infinity_polling(none_stop=True)
+bot.infinity_polling(none_stop=True) #
